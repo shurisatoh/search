@@ -1,0 +1,361 @@
+﻿----------------------------------------------------------
+ 不動産検索システム ebs3 ver.2.0 (2022/08/11)
+ 著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+ 制作 ITS kazuyuki nakatsu
+ HomePage:https://infotese.com
+ Copyright (c) ITS All Rights Reserved.
+
+ 著作権放棄しませんので著作権表記は、変更削除禁止です。
+ ブラウザーに表示される著作権の表示リンクは削除は、OKです。
+----------------------------------------------------------
+
+
+ご購入頂きありがとうございます。
+
+エラーのないよう注意して制作しましたが、エラー等ある場合
+ホームページお問合せページよりご連絡頂けると幸いです。
+
+セキュリティは、下記内容で注意をはらって制作しておりますが
+このCGIを使用したことによるあらゆる損害は、保証出来ません。
+
+下記アドレスにてサンプル公開しております。
+https://infotese.com/websystem/ebs3/
+
+サーバーの環境
+PHP5.2.8以上（PHP7.4対応）　php[GD2 $_SERVER['REQUEST_URI'] mb_send_mail]
+MySQL (5以上)
+.htaccess
+利用可能なこと
+
+フレームワークは、cakephp-2.10.22を使用しています。
+
+php[GD2]で画像サイズ変換をしています。
+
+php[$_SERVER['REQUEST_URI']]で
+アドレスの変換で利用しています。
+
+php[mb_send_mail]で
+お問合せメールを送信しています。
+
+.htaccess で
+アドレスの変換とデーターの保護で利用しています。
+------------------------------------------------
+セキュリティー
+家主名住所TELNo等大事なデータを関係者以外に見られないよう
+外部からアクセス出来ないフォルダー物件資料を設置しています。
+
+文字コード
+文字コードは、UTF-8を使用しています。
+
+ブラウザー
+ブラウザーは、
+Google Chromeバージョン: 83.0.4103.106（Official Build） （64 ビット）
+で動作確認しています。
+------------------------------------------------
+構成
+ebs3
+├─SampleTop.html　サンプルのトップページ
+└─search　ebs3のファイルすべてがあるフォルダー
+    ├─siryouImage　資料画像フォルダー
+    ├─app　アプリケーションフォルダー
+        ├─Controller　PHPのプログラムフォルダー
+        ├─Vendor　設定ファイルフォルダー
+        ├─View　html等表示ファイルフォルダー
+        ├─webroot　WEB公開フォルダー
+            ├─css　スタイルシートフォルダー
+            ├─img　画像フォルダー
+            └─js　JavaScriptフォルダー
+------------------------------------------------
+セットアップは、
+１、
+FTPソフトで、[ebs3]の1つ下[search]フォルダー内ファイルをすべてと
+SampleTop.htmlをサーバーにアップとしてください。
+（[SampleTop.html]は、サンプルのトップページですので、
+（お勧め物件表示部分をご使用のTOPページに張り付けて使用してください。
+張り付けたあとは、[SampleTop.html]は不要なので削除してください。）
+権限の設定は、サーバーの仕様に合わせてください。
+アップロードするファイルの属性を設定しておけば便利です。
+（フリーソフトFFFTPの場合　オプション→転送３→追加→
+ファイル名　*.php　属性　705　）
+　すべての　.php　　　　　　705
+ｐｈｐが動作しない場合　phpファイル755
+各フォルダー755
+画像変更がエラー出る場合ＵＰした画像ファイルに755
+を試してください。
+
+２、[ebs3]で利用するMySQLデータベースをご使用するサーバーで作成してください。
+作成した後、
+【http://設置したドメイン/search/Setting】
+にアクセスし
+データベースの情報を入力しましたら入力した管理者メールアドレスにログイン出来る[UserName・Password]
+が送られますので、
+【http://設置したドメイン/search/Menu】
+にアクセスしてください。
+
+３、
+「不動産検索システム ebs3 index」から「設定」に進み設定しましたら完了です。
+（新規サイトでGoogle Mapsを使用する場合はAPIキーが必須になりましたので、
+「メニュー」→「設定」で「Google MapsAPIキー」を入力してご利用ください。
+「Google MapsAPIキー」の取得入力方法は、
+弊社ホームページの「不動産検索システム ebs3」
+に掲載しています。）
+------------------------------------------------
+「台帳・看板・情報（情報誌１コマ）」の印刷は、
+ブラウザーの初期設定では、ページ番号、アドレス等入ってしまいますので
+Internet Explorerのページの設定で　　ヘッダーとフッターを【-空-】
+にしてください。あと余白の調整をすれば綺麗に印刷出来ます。
+
+　情報誌は、１コマに設定してますので、
+　Print Screenボタンを押して画面をコピーして
+　画像編集ソフトで切り抜き
+エクセル等で作成した１コマにはめ込んでご使用ください。
+------------------------------------------------
+MySQLのデータは下記内容になります。
+
+ユーザー,users
+1,id,INT PRIMARY KEY,ID
+2,username,VARCHAR( 255 ),ユーザーネーム
+3,password,VARCHAR( 255 ),パスワード
+4,name,VARCHAR( 255 ),名前
+
+賃貸,rents,
+1,id,INT PRIMARY KEY,物件番号
+2,syubetu,TINYINT,種別
+3,bukkenmei,VARCHAR( 255 ),物件名
+4,bu_zyuusyo1,VARCHAR( 255 ),物件住所
+5,bu_zyuusyo2,VARCHAR( 255 ),物件住所詳細
+6,madori1,TINYINT,間取り
+7,madori2,TINYINT,間取り2
+8,heibei,DOUBLE,専有面積
+9,yatin_k,INT,家賃
+10,kyoueki_k,VARCHAR( 255 ),共益費
+11,hosyou_ku,TINYINT,保証区分
+12,hosyou_k,VARCHAR( 255 ),保証/敷金
+13,kaiyaku_ku,TINYINT,解約引・礼金等区分
+14,kaiyaku_k,VARCHAR( 255 ),解約引
+15,tyuusya_k,VARCHAR( 255 ),駐車料
+16,kouzou,TINYINT,構造
+17,kaisuu,TINYINT,階数
+18,tiku_nen,SMALLINT,築年
+19,tiku_tuki,TINYINT,月
+20,soukosuu,SMALLINT,総戸数
+21,eki_en1,SMALLINT,沿線１
+22,eki_eki1,SMALLINT,駅１
+23,eki_ko1,TINYINT,交通種別１
+24,eki_hun1,SMALLINT,分１
+25,eki_en2,SMALLINT,沿線２
+26,eki_eki2,SMALLINT,駅２
+27,eki_ko2,TINYINT,交通種別２
+28,eki_hun2,SMALLINT,分２
+29,eki_en3,SMALLINT,沿線３
+30,eki_eki3,SMALLINT,駅３
+31,eki_ko3,TINYINT,交通種別３
+32,eki_hun3,SMALLINT,分３
+33,yanusi_mei,VARCHAR( 255 ),家主名
+34,yanusi_zyuu,VARCHAR( 255 ),家主住所
+35,yanusi_tel,VARCHAR( 255 ),家主TEL
+36,yanusi_fax,VARCHAR( 255 ),家主FAX
+37,yanusi_email,VARCHAR( 255 ),家主eMail
+38,kanri_mei,VARCHAR( 255 ),管理会社
+39,kanri_zyuu,VARCHAR( 255 ),管理住所
+40,kanri_tel,VARCHAR( 255 ),管理電話
+41,kanri_fax,VARCHAR( 255 ),管理FAX
+42,kanri_tantou,VARCHAR( 255 ),管理担当
+43,kanri_email,VARCHAR( 255 ),管理eMail
+44,setubi1,TINYINT,設備１
+45,setubi2,TINYINT,設備２
+46,setubi3,TINYINT,設備３
+47,setubi4,TINYINT,設備４
+48,setubi5,TINYINT,設備５
+49,setubi6,TINYINT,設備６
+50,setubi7,TINYINT,設備７
+51,setubi8,TINYINT,設備８
+52,setubi9,TINYINT,設備９
+53,setubi10,TINYINT,設備１０
+54,setubi11,TINYINT,設備１１
+55,setubi12,TINYINT,設備１２
+56,setubi13,TINYINT,設備１３
+57,setubi14,TINYINT,設備１４
+58,setubi15,TINYINT,設備１５
+59,setubi16,TINYINT,設備１６
+60,setubi17,TINYINT,設備１７
+61,setubi18,TINYINT,設備１８
+62,setubi19,TINYINT,設備１９
+63,setubi20,TINYINT,設備２０
+64,syozaikai,VARCHAR( 255 ),所在階
+65,new,TINYINT,new
+66,map1,VARCHAR( 255 ),map1（マップ検索追加で未使用）
+67,map2,VARCHAR( 255 ),map2
+68,comment,TEXT,コメント
+69,gasu,TINYINT,ガス
+70,denki,TINYINT,電気
+71,suidou,TINYINT,水道
+72,barukonii,TINYINT,バルコニー
+73,muki,TINYINT,向き
+74,kasaihoken,TINYINT,火災保険
+75,kasai_k,INT,保険金額
+76,kasai_nen,TINYINT,保険年数
+77,keiyaku_ki,TINYINT,契約期間
+78,kousin_syu,TINYINT,更新種別
+79,kousinryou,VARCHAR( 255 ),更新料
+80,koukokuryou,VARCHAR( 255 ),広告料
+81,touroku_date,DATE,登録日時
+82,daityou_bi,TEXT,台帳裏備考
+83,suidouryou,VARCHAR( 255 ),水道料金
+84,gousitu,VARCHAR( 255 ),号室
+85,zyoukyou,VARCHAR( 255 ),状況（入居日）
+86,nyuuryokusya,VARCHAR( 255 ),入力者
+87,kagi_syozai,VARCHAR( 255 ),鍵所在
+88,autolock,VARCHAR( 255 ),オートロック
+89,hp_hyouzi,TINYINT,お客様HP表示なし
+90,gaikan_img,TINYINT,外観写真
+91,madori_img,TINYINT,間取り図
+92,siryou_img,TINYINT,物件資料
+93,gaikan_co,VARCHAR( 255 ),外観コメント写真
+94,madori_co,VARCHAR( 255 ),間取コメント
+95,siryou_co,VARCHAR( 255 ),資料コメント
+96,syousai_img1,TINYINT,詳細画像1
+97,syousai_img2,TINYINT,詳細画像2
+98,syousai_img3,TINYINT,詳細画像3
+99,syousai_img4,TINYINT,詳細画像4
+100,syousai_img5,TINYINT,詳細画像5
+101,syousai_img6,TINYINT,詳細画像6
+102,syousai_img7,TINYINT,詳細画像7
+103,syousai_img8,TINYINT,詳細画像8
+104,syousai_img9,TINYINT,詳細画像9
+105,syousai_img10,TINYINT,詳細画像10
+106,syousai_co1,VARCHAR( 255 ),詳細画像1コメント
+107,syousai_co2,VARCHAR( 255 ),詳細画像2コメント
+108,syousai_co3,VARCHAR( 255 ),詳細画像3コメント
+109,syousai_co4,VARCHAR( 255 ),詳細画像4コメント
+110,syousai_co5,VARCHAR( 255 ),詳細画像5コメント
+111,syousai_co6,VARCHAR( 255 ),詳細画像6コメント
+112,syousai_co7,VARCHAR( 255 ),詳細画像7コメント
+113,syousai_co8,VARCHAR( 255 ),詳細画像8コメント
+114,syousai_co9,VARCHAR( 255 ),詳細画像9コメント
+115,syousai_co10,VARCHAR( 255 ),詳細画像10コメント
+
+戸建,houses,
+1,id,INT PRIMARY KEY,物件番号
+2,syubetu,TINYINT,種別
+3,bukkenmei,VARCHAR( 255 ),物件名
+4,bu_zyuusyo1,VARCHAR( 255 ),物件住所
+5,bu_zyuusyo2,VARCHAR( 255 ),物件住所詳細
+6,madori1,TINYINT,間取り
+7,madori2,TINYINT,間取り2
+8,totimen,DOUBLE,土地面積
+9,totisyu,TINYINT,土地面積種別
+10,sidoumen,DOUBLE,私道面積
+11,tatemen,DOUBLE,建物面積
+12,madori1f,VARCHAR( 255 ),１階間取り
+13,madori2f,VARCHAR( 255 ),２階間取り
+14,madori3f,VARCHAR( 255 ),３階間取り
+15,madorita,VARCHAR( 255 ),その他間取り
+16,kakaku,INT,価格
+17,tax,VARCHAR( 255 ),内消費税額
+18,kouzou,TINYINT,構造
+19,tousuu,VARCHAR( 255 ),棟数
+20,tizyoukai,TINYINT,地上階数
+21,tikakai,TINYINT,地下階数
+22,tiku_nen,SMALLINT,築年
+23,tiku_tuki,TINYINT,築月
+24,kokudo,TINYINT,国土法
+25,timoku,TINYINT,地目
+26,tosikei,TINYINT,都市計画
+27,youtoti,TINYINT,用途地域
+28,kenpei,SMALLINT,建ペイ率
+29,youseki,SMALLINT,容積率
+30,eki_en1,SMALLINT,沿線１
+31,eki_eki1,SMALLINT,駅１
+32,eki_ko1,TINYINT,交通種別１
+33,eki_hun1,SMALLINT,分１
+34,eki_en2,SMALLINT,沿線２
+35,eki_eki2,SMALLINT,駅２
+36,eki_ko2,TINYINT,交通種別２
+37,eki_hun2,SMALLINT,分２
+38,eki_en3,SMALLINT,沿線３
+39,eki_eki3,SMALLINT,駅３
+40,eki_ko3,TINYINT,交通種別３
+41,eki_hun3,SMALLINT,分３
+42,seigen1,TINYINT,防火
+43,seigen2,TINYINT,準防火
+44,seigen3,TINYINT,高度
+45,seigen4,TINYINT,高度利用
+46,seigen5,TINYINT,風致
+47,seigen6,TINYINT,文教
+48,seigen7,TINYINT,その他
+49,seigen8,TINYINT,[空]
+50,seigen9,TINYINT,[空]
+51,seigen10,TINYINT,[空]
+52,tisei,TINYINT,地勢
+53,hutaiken,TINYINT,付帯権利
+54,totiken,TINYINT,土地権利
+55,genzyou,TINYINT,現状
+56,hikiwatasi,VARCHAR( 255 ),引渡時期
+57,hp_hyouzi,TINYINT,お客様HP表示なし
+58,setubi1,TINYINT,駐車場
+59,setubi2,TINYINT,電気
+60,setubi3,TINYINT,上水道
+61,setubi4,TINYINT,下水道
+62,setubi5,TINYINT,浄化槽
+63,setubi6,TINYINT,汲取り
+64,setubi7,TINYINT,都市ガス
+65,setubi8,TINYINT,プロパンガス
+66,setubi9,TINYINT,外構付
+67,setubi10,TINYINT,側溝
+68,setubi11,TINYINT,電話
+69,setubi12,TINYINT,インターネット
+70,setubi13,TINYINT,室内洗濯機置場
+71,setubi14,TINYINT,システムキッチン
+72,setubi15,TINYINT,追焚き機能
+73,setubi16,TINYINT,シャンプードレッサー
+74,setubi17,TINYINT,シャワー付トイレ
+75,setubi18,TINYINT,浴室乾燥機
+76,setubi19,TINYINT,モニターホン
+77,setubi20,TINYINT,[空]
+78,setubi21,TINYINT,[空]
+79,setubi22,TINYINT,[空]
+80,new,TINYINT,new
+81,map1,VARCHAR( 255 ),map1（マップ検索追加で未使用）
+82,map2,VARCHAR( 255 ),map2
+83,comment,TEXT,コメント
+84,touroku_date,DATE,登録日時
+85,urinusikei,TINYINT,売主形態
+86,torihikitai,TINYINT,取引態様
+87,uketorikei,VARCHAR( 255 ),受取り報酬
+88,u_simei,VARCHAR( 255 ),売主：氏名（会社名）
+89,u_tantou,VARCHAR( 255 ),売主：担当
+90,u_zyuusyo,VARCHAR( 255 ),売主：住所
+91,u_tel,VARCHAR( 255 ),売主：TEL
+92,u_fax,VARCHAR( 255 ),売主：FAX
+93,u_email,VARCHAR( 255 ),売主：eMail
+94,bikou,TEXT,備考（社内用）
+95,kagi_syozai,VARCHAR( 255 ),鍵所在
+96,nyuuryokusya,VARCHAR( 255 ),入力者
+97,gaikan_img,TINYINT,外観写真
+98,madori_img,TINYINT,間取り図
+99,siryou_img,TINYINT,物件資料
+100,gaikan_co,VARCHAR( 255 ),外観コメント写真
+101,madori_co,VARCHAR( 255 ),間取コメント
+102,siryou_co,VARCHAR( 255 ),資料コメント
+103,syousai_img1,TINYINT,詳細画像1
+104,syousai_img2,TINYINT,詳細画像2
+105,syousai_img3,TINYINT,詳細画像3
+106,syousai_img4,TINYINT,詳細画像4
+107,syousai_img5,TINYINT,詳細画像5
+108,syousai_img6,TINYINT,詳細画像6
+109,syousai_img7,TINYINT,詳細画像7
+110,syousai_img8,TINYINT,詳細画像8
+111,syousai_img9,TINYINT,詳細画像9
+112,syousai_img10,TINYINT,詳細画像10
+113,syousai_co1,VARCHAR( 255 ),詳細画像1コメント
+114,syousai_co2,VARCHAR( 255 ),詳細画像2コメント
+115,syousai_co3,VARCHAR( 255 ),詳細画像3コメント
+116,syousai_co4,VARCHAR( 255 ),詳細画像4コメント
+117,syousai_co5,VARCHAR( 255 ),詳細画像5コメント
+118,syousai_co6,VARCHAR( 255 ),詳細画像6コメント
+109,syousai_co7,VARCHAR( 255 ),詳細画像7コメント
+120,syousai_co8,VARCHAR( 255 ),詳細画像8コメント
+121,syousai_co9,VARCHAR( 255 ),詳細画像9コメント
+122,syousai_co10,VARCHAR( 255 ),詳細画像10コメント
+------------------------------------------------

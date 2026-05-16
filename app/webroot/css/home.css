@@ -1,0 +1,469 @@
+@charset "utf-8";
+/*
+----------------------------------------------------------
+不動産検索システム ebs3
+著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+制作 ITS kazuyuki nakatsu
+HomePage:https://infotese.com
+Copyright (c) ITS All Rights Reserved.
+----------------------------------------------------------
+*/
+
+/* コンテンツ */
+#content {
+	color: #333;
+	font-family: "メイリオ";
+	width: 705px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#content a {
+	color: #333;
+}
+#content a:hover {
+	color: #999;
+}
+#content ul {
+	padding-left: 0px;
+}
+#content li {
+	list-style-type: none;
+}
+#content #search {
+	 border: 1px solid rgb(204, 204, 204);
+}
+#content h2 {
+    font-size: 23px;
+	text-align: center;
+    font-weight: normal;
+    color: #FFF;
+    background-color: #398FCA;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    padding: 8px 5px 5px 5px;
+    margin: 0px;
+}
+#content .search {
+	float: left;
+	padding: 5px 0px 5px 20px;
+}
+#content #setubi {
+	 border-top: 1px solid rgb(204, 204, 204);
+	clear: left;
+	text-align: center;
+	cursor:pointer;
+}
+#content #setubi_menu {
+	padding: 10px;
+}
+#content #setubi_koumoku label {
+	float: left;
+	padding: 5px 20px 5px 0px;
+}
+#content #submit {
+	clear: left;
+	border-top: 1px solid rgb(204, 204, 204);
+	padding: 10px;
+	text-align: center;
+}
+#content .submit input,#busub {
+	background-color: #398FCA;
+	color: #FFF;
+	border: 1px solid rgb(204, 204, 204);
+	padding: 5px 10px 5px 10px;
+	font-size: 18px;
+}
+#content .page {
+	text-align: right;
+	font-size: 0.87em;
+	margin-bottom: 5px;
+	padding: 0px;
+	margin-top: 15px;
+	margin-right: 10px;
+	margin-left: 0px;
+	height: 27px;
+}
+#content .current {
+	font-size: x-large;
+	text-decoration: underline;
+	color: #666;
+}
+#content .page #line {
+	text-align: left;
+	float: left;
+	margin-left: 5px;
+	padding-top: 8px;
+}
+
+/* コンテンツボックス */
+#content .post {
+	padding: 5px;
+	border: 1px solid rgb(204, 204, 204);
+	margin-bottom: 5px;
+	 overflow: hidden;
+	 text-align: center;
+}
+#content .post a {
+	color: #FFF;
+}
+#content .post a:hover {
+	color: #FFF;
+}
+#content .post .new,.osusume .new {
+	background-color: #D9534F;
+ 	border-radius:3px;
+	color:#fff;
+	display:inline-block;
+	margin:0px;
+	padding:2px 5px 2px 5px;
+	font-size: 5px;
+	font-weight: bold;
+    line-height: 15px;
+}
+#content .post a {
+  text-decoration: none;
+}
+#content .post .contact {
+  background-color: #398FCA;
+  width: 200px;
+  font-size: 23px;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 50px;
+  position: relative;
+}
+#content .post .contact::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  border: 2px solid white;
+  border-radius: 50px;
+}
+#content .post table {
+	margin-right: auto;
+	margin-left: auto;
+}
+#content .post #post_content {
+	padding: 20px;
+}
+#content #page_h2 {
+	margin: 0px;
+	padding: 10px;
+	border: 1px solid rgb(204, 204, 204);
+	text-align: left;
+	text-indent: 20px;
+	font-size: 0.87em;
+	background-image: url("../img/titlebar.jpg");
+}
+#content .post h2 a {
+	color: rgb(0, 0, 0);
+	text-decoration: none;
+}
+#content .post p {
+	line-height: 1.6;
+	font-size: 0.87em;
+	margin-top: 10px;
+}
+#content .post td {
+	font-size: 0.87em;
+	padding: 2px;
+}
+#content .post .bkco {
+	background-color: #398FCA;
+	color: #FFF;
+}
+#content .post .bkco a {
+	color: #FFF;
+	text-decoration: underline;
+}
+#content .post .table_center {
+	text-align: center;
+}
+#content .post .table_center td {
+	padding-left: 5px;
+	padding-right: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #CCCCCC;
+}
+#content .post .img_sy {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#content .post #td_j {
+	text-align: left;
+	text-indent: 40px;
+}
+#content .post li {
+	line-height: 1.6;
+	font-size: 0.87em;
+}
+#content p.postinfo {
+	margin: 20px 0px 0px;
+	text-align: right;
+	color: rgb(12, 139, 205);
+	clear: both;
+}
+#content .post table .pu {
+	color: #666;
+	font-size: x-large;
+	line-height: 20px;
+}
+#content .post .viewlink {
+	height: 25px;
+	width: 50px;
+	text-align: center;
+	display: block;
+	color: #333;
+	margin-right: auto;
+	margin-left: auto;
+	text-decoration: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #3D93CD;
+	font-size: 1.2em;
+	color: rgb(255, 255, 255);
+}
+#content p.postinfo a {
+	color: rgb(0, 51, 204);
+}
+/* コンテンツボックス画像 */
+#content .aligncenter {
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+#content .post img {
+	border: currentColor;
+}
+#content .post #new {
+	text-align: right;
+}
+#content .post .table_center table td {
+	font-size: 1em;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#content .alignleft {
+	margin-right: 10px;
+	margin-bottom: 10px;
+	float: left;
+}
+#content .alignright {
+	margin-bottom: 10px;
+	margin-left: 10px;
+	float: right;
+}
+#content .wp-caption {
+	border: 1px solid rgb(170, 170, 170);
+	text-align: center;
+	padding-top: 5px;
+}
+/* トップページ */
+#osusumesetumei {
+	margin-left: 100px;
+}
+.osusume table {
+	text-align: center;
+	font-size: small;
+}
+.osusume td {
+	padding: 5px;
+	line-height: 25px;
+}
+.osusume #border {
+	border: 1px solid #999999;
+}
+.osusume h2 {
+font-size: 23px;
+    text-align: center;
+    font-weight: normal;
+    color: #FFF;
+    background-color: #398FCA;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    padding: 8px 5px 5px 5px;
+    margin: 0px;
+}
+.osusume span {
+	color: #666;
+	font-size: x-large;
+}
+.osusume .title{
+	color: #666;
+	font-size: 20px;
+	font-weight: normal;
+}
+#map_canvas {
+	width: 98%;
+	height: 300px;
+	margin-right: auto;
+	margin-left: auto;
+	border-width: 1px;
+	border-style: dotted;
+	border-color: #CCCCCC;
+}
+#formCo span {
+	color: #F00;
+}
+input.example1 { ime-mode: auto; }/* auto･･･現在の入力モードを適用（デフォルト) */
+input.example2 { ime-mode: active; }/* active･･･日本語入力モードをon */
+input.example3 { ime-mode: disabled; }/* disabled･･･英数半角のみ　日本語入力システムをoff */
+input.example4 { ime-mode: inactive; }/* inactive･･･英数半角入力モードをon */
+
+#contents01 {
+	height: auto;
+}
+#contents {
+	height: auto;
+}
+/* ---------- お問合せ PC表示 ---------- */
+#content .post #formCo table {
+	float: left;
+}
+#content .post #formCo .contact_item {
+	width: 30%;
+}
+#content .post #formCo .contact_input {
+	width: 70%;
+}
+#content .post #formCo .contact_submit {
+	width: 100%;
+}
+#content .post #formCo table .input_text {
+	width: 99%;
+}
+/* ---------- 検索 賃貸 PC表示 ---------- */
+#content .post {
+	width: 693px;
+}
+#content .post .item {
+	float: left;
+}
+#content .post .list {
+	float: left;
+	height: 105px;
+}
+#search0 {
+	margin-top: 100px;
+	margin-left: 285px;
+	font-size: 20px;
+}
+#content .post h2 {
+	margin-bottom: 2px;
+}
+#content .post .item .bkco {
+	height: 105px;
+}
+#content .post .w100 {
+	width: 100%;
+	height: 32px;
+}
+#content .post .w100 .bkco {
+	width: 24.8%;
+}
+#content .post .w50 {
+	width: 50%;
+	float: left;
+	height: 32px;
+}
+#content .post .w50 .bkco {
+	width: 50%;
+}
+#content .post .w50 .bkco2 {
+	width: 25%;
+	background-color: #398FCA;
+	color: #FFF;
+}
+#content .post .w50 .image {
+	height: 321px;
+}
+#content .post #img_sy_td {
+	width: 693px;
+}
+#content .post #img_sy_td .img_sy {
+	width: 120px;
+	float: left;
+}
+#content .post .contact_td {
+	width: 693px;
+	height: 100px;
+	background-color: #FFF;
+}
+/* ---------- 詳細 賃貸 PC表示 ---------- */
+#content .img_td {
+	width: 390px;
+}
+#content .slider-for td {
+	width: 600px;
+	height: 600px;
+}
+#content .slider-nav td {
+	width: 100px;
+	height: 100px;
+}
+
+@media screen and (max-width:767px){ /* ---------- スマホ表示 ---------- */
+	#content {
+		width: 98%;
+	}
+	#content .page {
+		height: 70px;
+	}
+	#content .post {
+		width: 97%;
+	}
+	#content .post .item {
+		width: 50%;
+	}
+	#content .post .item .bkco {
+		height: 88px;
+	}
+	#content .post .list {
+		width: 48%;
+	}
+	#content .post .list {
+		height: 108px;
+	}
+	#content .slider-for td {
+		width: 300px;
+		height: 300px;
+	}
+	#content .slider-nav td {
+		width: 60px;
+		height: 60px;
+	}
+	#content .post .contact_td {
+		width: 100%;
+	}
+	#content .post #formCo .contact_item {
+		width: 100%;
+	}
+	#content .post #formCo .contact_input {
+		width: 100%;
+	}
+	#content .post .w50 {
+	width: 100%;
+}
+#content .post .w50 .bkco {
+	width: 25%;
+}
+}
+@media screen and (min-width:767px){ /* ---------- PC表示 ---------- */
+	#content .mobile {
+		display:none;
+	}
+	#content .post #formCo .bu {
+		height: 150px;
+	}
+	#content .slider-for .imgtitle {
+		font-size: 16px;
+	}
+}

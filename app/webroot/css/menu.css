@@ -1,0 +1,80 @@
+@charset "utf-8";
+/*
+----------------------------------------------------------
+不動産検索システム ebs3
+著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+制作 ITS kazuyuki nakatsu
+HomePage:https://infotese.com
+Copyright (c) ITS All Rights Reserved.
+----------------------------------------------------------
+*/
+body {
+	text-align: center;
+	font-family: "メイリオ";
+	line-height: 30px;
+}
+label {
+	margin-right: 10px;
+}
+#UserLoginForm .submit {
+	margin-top: 10px;
+}
+table {
+	border-right-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-right-color: #666;
+	border-bottom-width: 1px;
+	border-bottom-color: #666;
+}
+td {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #666;
+	border-left-color: #666;
+	text-align: center;
+}
+.tdleft {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #666;
+	border-left-color: #666;
+	text-align: left;
+}
+p#page_title {
+	text-align: center;
+}
+.useradd td{
+	text-align: left;
+}
+.errmsg {
+	color: #F00;
+}
+.copyright {
+	width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	text-align: right;
+	font-size: xx-small;
+}
+.copyright hr{
+	border: 0;
+    height: 0;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999;
+}
+.copyright a {
+	color: #333;
+}

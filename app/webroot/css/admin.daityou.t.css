@@ -1,0 +1,94 @@
+@charset "utf-8";
+/*
+----------------------------------------------------------
+不動産検索システム ebs3
+著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+制作 ITS kazuyuki nakatsu
+HomePage:https://infotese.com
+Copyright (c) ITS All Rights Reserved.
+----------------------------------------------------------
+*/
+p#page_title{
+	font-family: "メイリオ";
+}
+h1 {
+	font-size: small;
+	font-family: "メイリオ";
+	color: #666666;
+	margin: 30px;
+	font-weight: normal;
+	text-align: center;
+}
+td {
+	padding-left: 5px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+}
+table {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-left-color: #999999;
+	font-family: "ＭＳ Ｐゴシック";
+}
+.img_sy {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-size: x-small;
+	text-align: center;
+}
+#img {
+	padding: 5px;
+}
+#setubi {
+	padding: 5px;
+}
+hr {margin-top: 30px;}
+@media print{
+#leftcol {display: none}
+.copyright {display: none}
+hr {display: none}
+h1 {display: none}
+}
+#map_canvas {
+	width: 280px;
+	height: 280px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#meisyou {
+	font-family : メイリオ;
+	font-weight : normal;
+	font-size : medium;
+	font-style : italic;
+}
+#no_border {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.copyright {
+	font-family: "メイリオ";
+	width: 700px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 30px;
+	text-align: right;
+	font-size: xx-small;
+}
+.copyright hr{
+	border: 0;
+    height: 0;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999;
+}

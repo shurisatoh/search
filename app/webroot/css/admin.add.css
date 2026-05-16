@@ -1,0 +1,135 @@
+@charset "utf-8";
+/*
+----------------------------------------------------------
+不動産検索システム ebs3
+著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+制作 ITS kazuyuki nakatsu
+HomePage:https://infotese.com
+Copyright (c) ITS All Rights Reserved.
+----------------------------------------------------------
+*/
+body {
+	font-size: small;
+	font-family: "メイリオ";
+}
+h1 {
+	font-size: small;
+	margin-top: 50px;
+	font-weight: normal;
+	text-align: center;
+}
+#modoru {
+	margin-top: 50px;
+	width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 10px;
+}
+a {
+	color: #333;
+}
+table {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-left-color: #999999;
+}
+
+
+td {
+	border-bottom-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-bottom-color: #999999;
+	border-right-width: 1px;
+	border-right-color: #999999;
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-left: 25px;
+}
+
+.koumoku {
+	background-color: #DFDFDF;
+}
+#sum {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.line1 {
+	border: 1px solid #CCC;
+}
+.setubi {
+	margin: 0px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+#bikou {
+	overflow: auto;
+	height: 70px;
+	width: 350px;
+	border: 1px solid #999999;
+	margin-left: 50px;
+	text-indent: 0px;
+}
+.example1 { ime-mode: auto; }/* auto･･･現在の入力モードを適用（デフォルト) */
+.example2 { ime-mode: active; }/* active･･･日本語入力モードをon */
+.example3 { ime-mode: disabled; }/* disabled･･･英数半角のみ　日本語入力システムをoff */
+.example4 { ime-mode: inactive; }/* inactive･･･英数半角入力モードをon */
+#message {
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	width: 300px;
+}
+#img_sy {
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	text-indent: 0px;
+}
+#touroku span {
+	color: #F00;
+}
+.numbe{
+	text-align: right;
+	ime-mode: inactive;
+}
+.numbek{
+	text-align: right;
+	ime-mode: disabled;
+}
+.errmsg {
+	color: #F00;
+}
+p#page_title {
+	text-align: center;
+	font-size: medium;
+}
+.copyright {
+	width: 750px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: right;
+	font-size: xx-small;
+}
+.copyright hr{
+	border: 0;
+    height: 0;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999;
+}

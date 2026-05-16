@@ -1,0 +1,52 @@
+@charset "utf-8";
+/*
+----------------------------------------------------------
+不動産検索システム ebs3
+著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+制作 ITS kazuyuki nakatsu
+HomePage:https://infotese.com
+Copyright (c) ITS All Rights Reserved.
+----------------------------------------------------------
+*/
+body {
+	font-size: small;
+	color: #666666;
+	font-family: "メイリオ";
+}
+h1 {
+	font-size: small;
+	margin-top: 50px;
+	font-weight: normal;
+	text-align: center;
+}
+#modoru {
+	width: 200px;
+	margin-top: 50px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 10px;
+}
+
+.osusume table {
+	text-align: center;
+}
+.osusume td {
+	padding: 5px;
+}
+.osusume #border {
+	border: 1px solid #999999;
+}
+input.example1 { ime-mode: auto; }
+input.example2 { ime-mode: active; }
+input.example3 { ime-mode: disabled; }
+textarea.example4 { ime-mode: inactive; }
+.copyright {
+	width: 700px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: right;
+	font-size: xx-small;
+}
+.copyright a {
+	color: #333;
+}

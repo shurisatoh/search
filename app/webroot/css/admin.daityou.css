@@ -1,0 +1,115 @@
+@charset "utf-8";
+/*
+----------------------------------------------------------
+不動産検索システム ebs3
+著作権は、放棄してませんのでスクリプトの再配布を禁止します。
+制作 ITS kazuyuki nakatsu
+HomePage:https://infotese.com
+Copyright (c) ITS All Rights Reserved.
+----------------------------------------------------------
+*/
+p#page_title{
+	font-family: "メイリオ";
+}
+h1 {
+	font-size: small;
+	font-family: "メイリオ";
+	color: #666666;
+	margin: 30px;
+	font-weight: normal;
+	text-align: center;
+}
+table{
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-left-color: #999999;
+	font-size: small;
+	font-family: "ＭＳ Ｐゴシック";
+}
+
+td{
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	padding: 5px;
+}
+#td1 {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#td2 {
+	border-right-style: none;
+}
+#syousai {
+	margin: 5px;
+}
+#syougou {
+	padding-left: 200px;
+	border-right-style: none;
+}
+#setubi{
+	padding-left: 10px;
+}
+
+#img {
+	padding: 5px;
+}
+hr {margin-top: 30px;}
+@media print
+{
+#leftcol {display: none}
+hr {display: none}
+h1 {display: none}
+.copyright {display: none}
+}
+#map_canvas {
+	width: 280px;
+	height: 280px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#meisyou {
+	font-family : メイリオ;
+	font-weight : normal;
+	font-size : medium;
+	font-style : italic;
+}
+#no_border {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.img_sy {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	font-size: x-small;
+	text-align: center;
+}
+.copyright {
+	width: 950px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: right;
+	font-size: xx-small;
+}
+.copyright hr{
+	border: 0;
+    height: 0;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #999;
+}
+.copyright a {
+	color: #333;
+}

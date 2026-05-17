@@ -15,15 +15,16 @@ class RentController extends AppController {
 		$tinryouStartArr = tinryouStartArr();
 		$tinryouEndArr = tinryouEndArr();
 		$this->paginate['limit'] = 30;
-		$this->paginate['fields'] = array($modelName.'.id',$modelName.'.syubetu',$modelName.'.shicd',$modelName.'.zipcode',$modelName.'.bu_zyuusyo2',
-			$modelName.'.madori1',$modelName.'.madori2',$modelName.'.heibei',$modelName.'.yatin_k',
-			$modelName.'.kyoueki_k',$modelName.'.hosyou_ku',$modelName.'.hosyou_k',$modelName.'.kaiyaku_ku',
-			$modelName.'.kaiyaku_k',$modelName.'.tiku_nen',$modelName.'.tiku_tuki',$modelName.'.eki_en1',
-			$modelName.'.eki_eki1',$modelName.'.eki_ko1',$modelName.'.eki_hun1',$modelName.'.eki_en2',
-			$modelName.'.eki_eki2',$modelName.'.eki_ko2',$modelName.'.eki_hun2',$modelName.'.eki_en3',
-			$modelName.'.eki_eki3',$modelName.'.eki_ko3',$modelName.'.eki_hun3',$modelName.'.syozaikai',
-			$modelName.'.new',$modelName.'.touroku_date',$modelName.'.hp_hyouzi',$modelName.'.gaikan_img');
-		$this->paginate['conditions']['NOT'] =  array($modelName.'.hp_hyouzi' => 1);
+			$this->paginate['fields'] = array($modelName.'.id',$modelName.'.syubetu',$modelName.'.shicd',$modelName.'.zipcode',$modelName.'.bu_zyuusyo2',
+				$modelName.'.madori1',$modelName.'.madori2',$modelName.'.heibei',$modelName.'.yatin_k',
+				$modelName.'.kyoueki_k',$modelName.'.hosyou_ku',$modelName.'.hosyou_k',$modelName.'.kaiyaku_ku',
+				$modelName.'.kaiyaku_k',$modelName.'.tiku_nen',$modelName.'.tiku_tuki',$modelName.'.eki_en1',
+				$modelName.'.eki_eki1',$modelName.'.eki_ko1',$modelName.'.eki_hun1',$modelName.'.eki_en2',
+				$modelName.'.eki_eki2',$modelName.'.eki_ko2',$modelName.'.eki_hun2',$modelName.'.eki_en3',
+				$modelName.'.eki_eki3',$modelName.'.eki_ko3',$modelName.'.eki_hun3',$modelName.'.syozaikai',
+				$modelName.'.new',$modelName.'.touroku_date',$modelName.'.hp_hyouzi',$modelName.'.gaikan_img');
+			$this->paginate['conditions']['NOT'] =  array($modelName.'.hp_hyouzi' => 1);
+			$this->paginate['conditions'][$modelName.'.yatin_k >'] = 0;
 
 		if (!empty($this->request->query['keymoney0']) && $this->request->query['keymoney0'] === '1') {
     		$this->paginate['conditions'][$modelName . '.kaiyaku_k'] = 0;
@@ -108,20 +109,38 @@ class RentController extends AppController {
 			}
 		}
 
-		$this->paginate['sort'] = $modelName.'.id';
-		if(!empty($this->request->params['named']['sort']) && $this->request->params['named']['sort'] == 'madori1'){
-			$this->paginate['order'] = array(
-				$modelName.'.madori1' => $this->request->params['named']['direction'],
-				$modelName.'.madori2'=>$this->request->params['named']['direction']
-			);
-		}elseif(!empty($this->request->params['named']['sort']) && $this->request->params['named']['sort'] == 'tiku_nen'){
-			$this->paginate['order'] = array(
+			$sortOrder = $this->request->query('sort_order');
+			if (empty($sortOrder)) {
+				$sortOrder = 'rent_asc';
+			}
+			$this->paginate['order'] = array($modelName.'.yatin_k' => 'asc', $modelName.'.id' => 'desc');
+			if ($sortOrder === 'rent_desc') {
+				$this->paginate['order'] = array($modelName.'.yatin_k' => 'desc', $modelName.'.id' => 'desc');
+			} elseif ($sortOrder === 'area_desc') {
+				$this->paginate['order'] = array($modelName.'.heibei' => 'desc', $modelName.'.id' => 'desc');
+			} elseif ($sortOrder === 'area_asc') {
+				$this->paginate['order'] = array($modelName.'.heibei' => 'asc', $modelName.'.id' => 'desc');
+			} elseif ($sortOrder === 'station_asc') {
+				$this->paginate['order'] = array($modelName.'.eki_hun1' => 'asc', $modelName.'.id' => 'desc');
+			} elseif ($sortOrder === 'address_asc') {
+				$this->paginate['order'] = array($modelName.'.zipcode' => 'asc', $modelName.'.bu_zyuusyo2' => 'asc', $modelName.'.id' => 'desc');
+			} elseif ($sortOrder === 'built_desc') {
+				$this->paginate['order'] = array($modelName.'.tiku_nen' => 'desc', $modelName.'.tiku_tuki' => 'desc', $modelName.'.id' => 'desc');
+			}
+			if(!empty($this->request->params['named']['sort']) && $this->request->params['named']['sort'] == 'madori1'){
+				$this->paginate['order'] = array(
+					$modelName.'.madori1' => $this->request->params['named']['direction'],
+					$modelName.'.madori2'=>$this->request->params['named']['direction']
+				);
+			}elseif(!empty($this->request->params['named']['sort']) && $this->request->params['named']['sort'] == 'tiku_nen'){
+				$this->paginate['order'] = array(
 				$modelName.'.tiku_nen' => $this->request->params['named']['direction'],
 				$modelName.'.tiku_tuki'=>$this->request->params['named']['direction']
 			);
 		}
-		$this->paginate['direction'] = 'desc';
-		$this->set('data',$this->paginate($modelName));
+			$this->paginate['direction'] = 'desc';
+			$this->set('sortOrder',$sortOrder);
+			$this->set('data',$this->paginate($modelName));
 		$this->set('modelName',$modelName);
 	}
 	public function map() {

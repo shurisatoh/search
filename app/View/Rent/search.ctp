@@ -322,21 +322,72 @@ function($da, $modelName, $ensenArr) {
 	font-size: 16px;
 	font-weight: 900;
 }
-.reg-results-bar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	.reg-results-bar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	gap: 16px;
 	margin-bottom: 14px;
 	padding: 18px;
 	border: 1px solid #dfe6ec;
 	border-radius: 8px;
-	background: #fff;
-	box-shadow: 0 8px 22px rgba(20, 36, 50, 0.06);
-}
-.reg-results-bar p {
-	margin: 0;
-	color: #667484;
+		background: #fff;
+		box-shadow: 0 8px 22px rgba(20, 36, 50, 0.06);
+	}
+	.reg-search-toolbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin-bottom: 14px;
+		padding: 16px 18px;
+		border: 1px solid #dfe6ec;
+		border-radius: 8px;
+		background: #fff;
+		box-shadow: 0 8px 22px rgba(20, 36, 50, 0.06);
+	}
+	.reg-breadcrumb {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 10px;
+		color: #1d2737;
+		font-size: 16px;
+		font-weight: 900;
+		line-height: 1.4;
+	}
+	.reg-breadcrumb a,
+	.reg-breadcrumb span {
+		color: #1d2737;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.reg-breadcrumb strong {
+		color: #1d2737;
+		text-decoration: none;
+	}
+	.reg-breadcrumb b {
+		color: #1d2737;
+		font-size: 20px;
+		line-height: 1;
+	}
+	.reg-sort-control {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		color: #667484;
+		font-size: 13px;
+		font-weight: 800;
+		white-space: nowrap;
+	}
+	#content.reg-rent-search .reg-sort-control select {
+		width: 220px;
+		min-height: 40px;
+		margin-top: 0;
+	}
+	.reg-results-bar p {
+		margin: 0;
+		color: #667484;
 	font-size: 13px;
 	font-weight: 800;
 }
@@ -484,13 +535,22 @@ function($da, $modelName, $ensenArr) {
 	#content.reg-rent-search #setubi_koumoku {
 		grid-template-columns: 1fr;
 	}
-	.reg-results-bar,
-	.reg-room-row {
-		align-items: stretch;
-		flex-direction: column;
+		.reg-results-bar,
+		.reg-search-toolbar,
+		.reg-room-row {
+			align-items: stretch;
+			flex-direction: column;
+		}
+		#content.reg-rent-search .reg-sort-control {
+			align-items: stretch;
+			flex-direction: column;
+			white-space: normal;
+		}
+		#content.reg-rent-search .reg-sort-control select {
+			width: 100%;
+		}
 	}
-}
-</style>
+	</style>
 
 <div id="content" class="reg-rent-search">
 <div class="reg-page-title">
@@ -564,10 +624,31 @@ echo $setubi;
   'div'=>false,
   'onclick'=>'return clearShicdIfNeeded();'
 )); ?>
-</div>
-</li>
-</ul>
-<div class="reg-results-bar">
+	</div>
+	</li>
+	</ul>
+	<div class="reg-search-toolbar">
+		<nav class="reg-breadcrumb" aria-label="Breadcrumb">
+			<a href="<?php echo $this->webroot; ?>Rent/search">賃貸物件を都道府県から検索</a>
+			<b>›</b>
+			<a href="<?php echo $this->webroot; ?>Rent/search?ti=3">東京都の一覧</a>
+			<b>›</b>
+			<strong>江東区</strong>
+		</nav>
+		<label class="reg-sort-control">
+			Sort
+			<select id="sort_order" name="sort_order" onchange="changeSortOrder(this.value)">
+				<option value="rent_asc"<?php if(!empty($sortOrder) && $sortOrder == 'rent_asc'){ echo ' selected="selected"'; } ?>>家賃が安い順</option>
+				<option value="rent_desc"<?php if(!empty($sortOrder) && $sortOrder == 'rent_desc'){ echo ' selected="selected"'; } ?>>家賃が高い順</option>
+				<option value="area_desc"<?php if(!empty($sortOrder) && $sortOrder == 'area_desc'){ echo ' selected="selected"'; } ?>>面積が広い順</option>
+				<option value="area_asc"<?php if(!empty($sortOrder) && $sortOrder == 'area_asc'){ echo ' selected="selected"'; } ?>>面積が狭い順</option>
+				<option value="station_asc"<?php if(!empty($sortOrder) && $sortOrder == 'station_asc'){ echo ' selected="selected"'; } ?>>駅まで近い順</option>
+				<option value="address_asc"<?php if(!empty($sortOrder) && $sortOrder == 'address_asc'){ echo ' selected="selected"'; } ?>>住所順</option>
+				<option value="built_desc"<?php if(!empty($sortOrder) && $sortOrder == 'built_desc'){ echo ' selected="selected"'; } ?>>築年数が新しい順</option>
+			</select>
+		</label>
+	</div>
+	<div class="reg-results-bar">
 	<div>
 		<p>Search results</p>
 		<strong><?php echo $this->Paginator->counter('Search result: {:count} rooms'); ?></strong>
@@ -606,9 +687,16 @@ var ekis = new Array();
 
 
 
-var line_start = 0;
-var city_start = 0;
-var street_start = 0;
+	var line_start = 0;
+	var city_start = 0;
+	var street_start = 0;
+
+	function changeSortOrder(value) {
+		var params = new URLSearchParams(window.location.search);
+		params.set('sort_order', value);
+		params.delete('page');
+		window.location.search = params.toString();
+	}
 
 
 

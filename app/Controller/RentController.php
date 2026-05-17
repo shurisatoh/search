@@ -28,7 +28,10 @@ class RentController extends AppController {
 			$this->paginate['conditions'][$modelName.'.id !='] = 10672901083;
 
 		if (!empty($this->request->query['keymoney0']) && $this->request->query['keymoney0'] === '1') {
-    		$this->paginate['conditions'][$modelName . '.kaiyaku_k'] = 0;
+			$this->paginate['conditions'][$modelName . '.kaiyaku_k'] = 0;
+		}
+		if (!empty($this->request->query['deposit0']) && $this->request->query['deposit0'] === '1') {
+			$this->paginate['conditions'][$modelName . '.hosyou_k'] = 0;
 		}
 
 		$district = $this->request->query('district');

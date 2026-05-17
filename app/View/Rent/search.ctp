@@ -434,9 +434,9 @@ function($da, $modelName, $ensenArr) {
 	grid-template-columns: repeat(4, minmax(150px, 1fr));
 	gap: 8px;
 }
-#content.reg-rent-search #setubi_koumoku label {
-	float: none;
-	display: inline-flex;
+	#content.reg-rent-search #setubi_koumoku label {
+		float: none;
+		display: inline-flex;
 	align-items: center;
 	gap: 8px;
 	min-height: 36px;
@@ -445,9 +445,15 @@ function($da, $modelName, $ensenArr) {
 	border-radius: 8px;
 	background: #fbfdfe;
 	color: #304852;
-	font-size: 13px;
-	font-weight: 700;
-}
+		font-size: 13px;
+		font-weight: 700;
+	}
+	#content.reg-rent-search #setubi_koumoku label.reg-feature-priority {
+		border-color: #d45d33;
+		background: #fff4ef;
+		color: #b94722;
+		font-weight: 900;
+	}
 	#content.reg-rent-search #submit {
 		padding: 16px 0 0;
 		text-align: right;
@@ -753,10 +759,11 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
 <div class="accordion_head" id="setubi_menu">Features ↓Open Click</div>
 <div id="setubi_koumoku">
 <?php
-$setubi = '';
+$setubi = '<label class="reg-feature-priority"><input name="deposit0" type="checkbox" value="1"'.(!empty($this->request->query['deposit0']) ? ' checked="checked"' : '').'>No Deposit</label>'."\n";
+$setubi .= '<label class="reg-feature-priority"><input name="s18" type="checkbox" value="1"'.(!empty($this->request->query['s18']) ? ' checked="checked"' : '').'>Furnished</label>'."\n";
 $seCheck = 1;
 foreach($setubiArr as $key => $val){
-	if($val != ''){
+	if($val != '' && $key != 18){
 		$checked = '';
 		if(!empty($this->request->query['s'.$key])){$checked = ' checked="checked"';$seCheck = 1;}
 		$setubi .= '<label><input name="s'.$key.'" type="checkbox" value="1"'.$checked.'>'.$val.'</label>'."\n";

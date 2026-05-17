@@ -14,7 +14,7 @@ class RentController extends AppController {
 		$tiikiArr = tiikiArr();
 		$tinryouStartArr = tinryouStartArr();
 		$tinryouEndArr = tinryouEndArr();
-		$this->paginate['limit'] = PAGE_NUMK;
+		$this->paginate['limit'] = 30;
 		$this->paginate['fields'] = array($modelName.'.id',$modelName.'.syubetu',$modelName.'.shicd',$modelName.'.zipcode',$modelName.'.bu_zyuusyo2',
 			$modelName.'.madori1',$modelName.'.madori2',$modelName.'.heibei',$modelName.'.yatin_k',
 			$modelName.'.kyoueki_k',$modelName.'.hosyou_ku',$modelName.'.hosyou_k',$modelName.'.kaiyaku_ku',

@@ -206,53 +206,70 @@ function($da, $modelName, $ensenArr) {
 	font-weight: 800;
 	text-transform: uppercase;
 }
-.reg-page-title h1 {
-	margin: 0;
-	font-size: clamp(32px, 4vw, 52px);
-	line-height: 1.08;
-}
-#content.reg-rent-search #search {
-	display: grid;
-	grid-template-columns: repeat(4, minmax(150px, 1fr));
-	gap: 14px;
-	margin: 0 0 26px;
-	padding: 18px;
-	border: 1px solid #dfe6ec;
-	border-radius: 8px;
-	background: #fff;
-	box-shadow: 0 14px 36px rgba(20, 36, 50, 0.11);
-}
-#content.reg-rent-search #search h2 {
-	grid-column: 1 / -1;
-	margin: -18px -18px 2px;
-	padding: 18px;
-	background: #0a6d8f;
-	color: #fff;
-	font-size: 22px;
+	.reg-page-title h1 {
+		margin: 0;
+		font-size: clamp(32px, 4vw, 46px);
+		line-height: 1.08;
+	}
+	#content.reg-rent-search #search {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		align-items: start;
+		gap: 16px;
+		margin: 0 0 26px;
+		padding: 0 20px 20px;
+		border: 1px solid #dfe6ec;
+		border-radius: 8px;
+		background: #fff;
+		box-shadow: 0 14px 36px rgba(20, 36, 50, 0.11);
+	}
+	#content.reg-rent-search #search form {
+		display: contents;
+	}
+	#content.reg-rent-search #search > li:first-child {
+		grid-column: 1 / -1;
+		margin: 0 -20px 2px;
+		padding: 0;
+	}
+	#content.reg-rent-search #search h2 {
+		margin: 0;
+		padding: 18px 20px;
+		border-radius: 8px 8px 0 0;
+		background: #0a6d8f;
+		color: #fff;
+		font-size: 22px;
 	font-weight: 900;
 	text-align: left;
 }
-#content.reg-rent-search .search {
-	float: none;
-	padding: 0;
-	color: #667484;
+	#content.reg-rent-search .search {
+		display: block;
+		float: none;
+		padding: 0;
+		color: #667484;
 	font-size: 12px;
 	font-weight: 800;
 }
-#content.reg-rent-search select,
-#content.reg-rent-search input[type="text"] {
-	width: 100%;
-	min-height: 44px;
+	#content.reg-rent-search select,
+	#content.reg-rent-search input[type="text"] {
+		width: 100%;
+		min-height: 44px;
 	margin-top: 7px;
 	padding: 0 10px;
 	border: 1px solid #cfd9e2;
 	border-radius: 8px;
 	background: #fff;
-	color: #16202a;
-	font-size: 15px;
-}
-#content.reg-rent-search #setubi,
-#content.reg-rent-search #submit {
+		color: #16202a;
+		font-size: 15px;
+		box-sizing: border-box;
+	}
+	#content.reg-rent-search .search select + select {
+		margin-top: 8px;
+	}
+	#content.reg-rent-search .search input[type="checkbox"] {
+		margin: 0 8px 0 0;
+	}
+	#content.reg-rent-search #setubi,
+	#content.reg-rent-search #submit {
 	grid-column: 1 / -1;
 	border-top: 1px solid #dfe6ec;
 }
@@ -287,10 +304,14 @@ function($da, $modelName, $ensenArr) {
 	font-size: 13px;
 	font-weight: 700;
 }
-#content.reg-rent-search #submit {
-	padding: 14px 0 0;
-	text-align: right;
-}
+	#content.reg-rent-search #submit {
+		padding: 16px 0 0;
+		text-align: right;
+	}
+	#content.reg-rent-search #submit .submit {
+		display: flex;
+		justify-content: flex-end;
+	}
 #content.reg-rent-search .submit input {
 	min-height: 44px;
 	padding: 0 24px;
@@ -449,11 +470,11 @@ function($da, $modelName, $ensenArr) {
 	font-weight: 900;
 	text-decoration: none;
 }
-@media (max-width: 900px) {
-	#content.reg-rent-search #search,
-	#content.reg-rent-search #setubi_koumoku {
-		grid-template-columns: repeat(2, minmax(150px, 1fr));
-	}
+	@media (max-width: 900px) {
+		#content.reg-rent-search #search,
+		#content.reg-rent-search #setubi_koumoku {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	.reg-rent-card {
 		grid-template-columns: 1fr;
 	}
@@ -551,10 +572,10 @@ echo $setubi;
 		<p>Search results</p>
 		<strong><?php echo $this->Paginator->counter('Search result: {:count} rooms'); ?></strong>
 	</div>
-	<span><?php echo PAGE_NUMK; ?> per page</span>
+		<span>30 per page</span>
 </div>
 <p class="page">
-	<span id="line"><?php echo PAGE_NUMK.' per page / '.
+		<span id="line"><?php echo '30 per page / '.
 		$this->Paginator->counter('Total {:pages} pages / Search result: {:count}'); ?>
 	</span>
 <span class="mobile"><br /><br /></span>

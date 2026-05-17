@@ -389,15 +389,15 @@ function($da, $modelName, $ensenArr) {
 		min-height: 38px;
 		margin-top: 16px;
 		padding: 0 12px;
-		border: 1px solid #d45d33;
+		border: 1px solid #d8e3e8;
 		border-radius: 8px;
-		background: #fff4ef;
-		color: #b94722;
+		background: #fbfdfe;
+		color: #304852;
 		font-weight: 900;
 		box-sizing: border-box;
 	}
 		#content.reg-rent-search .reg-keymoney-option input[type="checkbox"]:checked + span {
-			color: #8f3519;
+			color: #225a61;
 	}
 	#content.reg-rent-search .reg-prefecture-field {
 		padding: 10px;
@@ -449,9 +449,9 @@ function($da, $modelName, $ensenArr) {
 		font-weight: 700;
 	}
 	#content.reg-rent-search #setubi_koumoku label.reg-feature-priority {
-		border-color: #d45d33;
-		background: #fff4ef;
-		color: #b94722;
+		border-color: #d8e3e8;
+		background: #fbfdfe;
+		color: #304852;
 		font-weight: 900;
 	}
 	#content.reg-rent-search #submit {

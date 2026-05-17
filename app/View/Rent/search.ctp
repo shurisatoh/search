@@ -79,9 +79,15 @@ if (!empty($data)) {
 
 foreach( $data as $da ){
 	if(!empty($da[$modelName]['gaikan_img'])){
-		
-			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/rent/gazou/'.$da[$modelName]['id'].'_0.jpg" alt="Exterior photo of property No.'.$da[$modelName]['id'].'" />';
-		
+		$exteriorImage = 'img/rent/gazou/'.$da[$modelName]['id'].'_1.jpg';
+		$fallbackImage = 'img/rent/gazou/'.$da[$modelName]['id'].'_0.jpg';
+		if (file_exists(WWW_ROOT.$exteriorImage)) {
+			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.$exteriorImage.'" alt="Exterior photo of property No.'.$da[$modelName]['id'].'" />';
+		} elseif (file_exists(WWW_ROOT.$fallbackImage)) {
+			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.$fallbackImage.'" alt="Property photo of property No.'.$da[$modelName]['id'].'" />';
+		} else {
+			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Exterior photo unavailable" />';
+		}
 	}else{
 		$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Exterior photo unavailable" />';
 	}

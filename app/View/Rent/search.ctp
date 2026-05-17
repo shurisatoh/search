@@ -79,17 +79,25 @@ if (!empty($data)) {
 
 foreach( $data as $da ){
 	if(!empty($da[$modelName]['gaikan_img'])){
-		$exteriorImage = 'img/rent/gazou/'.$da[$modelName]['id'].'_1.jpg';
-		$fallbackImage = 'img/rent/gazou/'.$da[$modelName]['id'].'_0.jpg';
-		if (file_exists(WWW_ROOT.$exteriorImage)) {
-			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.$exteriorImage.'" alt="Exterior photo of property No.'.$da[$modelName]['id'].'" />';
-		} elseif (file_exists(WWW_ROOT.$fallbackImage)) {
-			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.$fallbackImage.'" alt="Property photo of property No.'.$da[$modelName]['id'].'" />';
+		$photoImage = '';
+		$photoAlt = 'Property photo of property No.'.$da[$modelName]['id'];
+		foreach (array(1,2,3,4,5,6,7,8,9,10,11,12) as $photoIndex) {
+			$photoPath = 'img/rent/gazou/'.$da[$modelName]['id'].'_'.$photoIndex.'.jpg';
+			if (file_exists(WWW_ROOT.$photoPath)) {
+				$photoImage = $photoPath;
+				if ($photoIndex == 1) {
+					$photoAlt = 'Exterior photo of property No.'.$da[$modelName]['id'];
+				}
+				break;
+			}
+		}
+		if (!empty($photoImage)) {
+			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.$photoImage.'" alt="'.$photoAlt.'" />';
 		} else {
-			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Exterior photo unavailable" />';
+			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Property photo unavailable" />';
 		}
 	}else{
-		$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Exterior photo unavailable" />';
+		$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Property photo unavailable" />';
 	}
 	//--金額カンマ挿入処理
 	$nfArray = array('yatin_k');

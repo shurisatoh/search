@@ -80,10 +80,10 @@ if (!empty($data)) {
 foreach( $data as $da ){
 	if(!empty($da[$modelName]['gaikan_img'])){
 		
-			$da[$modelName]['gaikan_img'] = '<img src="'.$this->webroot.'img/rent/gazou/'.$da[$modelName]['id'].'_0.jpg" width="100" border="0" />';
+			$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/rent/gazou/'.$da[$modelName]['id'].'_0.jpg" alt="Exterior photo of property No.'.$da[$modelName]['id'].'" />';
 		
 	}else{
-		$da[$modelName]['gaikan_img'] = '<img src="'.$this->webroot.'img/noimage100.gif" border="0" />';
+		$da[$modelName]['gaikan_img'] = '<img class="reg-rent-card-photo" src="'.$this->webroot.'img/noimage100.gif" alt="Exterior photo unavailable" />';
 	}
 	//--金額カンマ挿入処理
 	$nfArray = array('yatin_k');
@@ -123,25 +123,21 @@ foreach( $data as $da ){
 		$da[$modelName]['new'] = '';
 	}
 	$table .= '
-<div class="post">
-		<table class="list"><tr><td width="93" align="center">
-			<a href="'.$this->webroot.'Rent/view?id='.$da[$modelName]['id'].'">
-				'.$da[$modelName]['gaikan_img'].'
-			</a>
-		</td></tr></table>
-		<table class="list"><tr><td align="center" width="140">
-			<span class="pu">'.$da[$modelName]['yatin_k'].'</span><br />
-			'.$da[$modelName]['kyoueki_k'].'</span><br />
-			'."Deposit".' '.$da[$modelName]['hosyou_k'].'<br>
-			'."Key money".' '.$da[$modelName]['kaiyaku_k'].'
-		</td></tr></table>
-		<table class="list"><tr><td align="center" width="72">
-			<span class="pu">'.$madori1Arr[$da[$modelName]['madori1']].$da[$modelName]['madori2'].'</span><br />
-			'.$da[$modelName]['heibei'].'㎡<br />
-			'.$da[$modelName]['syozaikai'].'th floor
-		</td></tr></table>
-		<table class="list"><tr><td align="center" width="177">
-			    '.h($address_en).$da[$modelName]['bu_zyuusyo2'].'<br />
+<article class="reg-rent-card">
+	<a class="reg-rent-card-media" href="'.$this->webroot.'Rent/view?id='.$da[$modelName]['id'].'">
+		'.$da[$modelName]['gaikan_img'].'
+		<span>Exterior photo</span>
+	</a>
+	<div class="reg-rent-card-body">
+		<div class="reg-rent-card-head">
+			<div>
+				<p class="reg-card-kicker">'.$da[$modelName]['new'].'Property No. '.$da[$modelName]['id'].'</p>
+				<h3>'.$syubetuArr[$da[$modelName]['syubetu']].' in Tokyo</h3>
+			</div>
+			<a href="'.$this->webroot.'Rent/view?id='.$da[$modelName]['id'].'" class="reg-save-button" aria-label="Save property">♡</a>
+		</div>
+		<p class="reg-rent-address">'.h($address_en).$da[$modelName]['bu_zyuusyo2'].'</p>
+		<div class="reg-station-lines">
    '.(
 function($da, $modelName, $ensenArr) {
     $stationStr = '';
@@ -150,34 +146,324 @@ function($da, $modelName, $ensenArr) {
         $line = isset($ensenArr[$da[$modelName]['eki_en' . $i]]) ? $ensenArr[$da[$modelName]['eki_en' . $i]] : '';
         $station = h($da[$modelName]['eki_eki' . $i]);
         $minutes = h($da[$modelName]['eki_hun' . $i]);
-        $stationStr .= $line . ' ' . $station . ' ' . $minutes . ' minutes<br />';
+        $stationStr .= '<span>' . $line . ' / ' . $station . ' / ' . $minutes . ' min walk</span>';
       }
     }
     return $stationStr;
   }
 )($da, $modelName, $ensenArr).'
- 
-			
-		</td></tr></table>
-		<table class="list"><tr><td align="center" width="92">
-			'.$da[$modelName]['new'].'
-			No.'.$da[$modelName]['id'].'<br />
-			'.$syubetuArr[$da[$modelName]['syubetu']].'<br />
-			'.$da[$modelName]['tiku_nen'].' '.'
-		</td></tr></table>
-		<table class="list"><tr><td align="center" width="56">
-			<a href="'.$this->webroot.'Rent/view?id='.$da[$modelName]['id'].'" class="viewlink">Details</a>
-		</td></tr></table>
-</div>
+		</div>
+		<div class="reg-rent-facts">
+			<span>'.$madori1Arr[$da[$modelName]['madori1']].$da[$modelName]['madori2'].'</span>
+			<span>'.$da[$modelName]['heibei'].'㎡</span>
+			<span>'.$da[$modelName]['syozaikai'].'th floor</span>
+			<span>Built '.$da[$modelName]['tiku_nen'].'</span>
+		</div>
+		<div class="reg-room-row">
+			<div>
+				<strong>¥'.$da[$modelName]['yatin_k'].'</strong>
+				<p>Managing fee ¥'.$da[$modelName]['kyoueki_k'].' / Deposit '.$da[$modelName]['hosyou_k'].' / Key money '.$da[$modelName]['kaiyaku_k'].'</p>
+			</div>
+			<a href="'.$this->webroot.'Rent/view?id='.$da[$modelName]['id'].'" class="reg-detail-button">Details</a>
+		</div>
+	</div>
+</article>
 ';
 }
 ?>
 
-<!-- コンテンツ -->
-<div id="content">
-<p>&nbsp;</p>
+<style>
+/* Real Estate Guide rental search refresh */
+#content.reg-rent-search {
+	width: min(1180px, calc(100% - 32px)) !important;
+	margin: 0 auto !important;
+	padding: 42px 0 64px !important;
+	background: #eef3f5 !important;
+	color: #16202a;
+	font-family: Arial, "Helvetica Neue", sans-serif;
+}
+.reg-page-title {
+	margin-bottom: 22px;
+}
+.reg-page-title p {
+	margin: 0 0 6px;
+	color: #667484;
+	font-size: 12px;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+.reg-page-title h1 {
+	margin: 0;
+	font-size: clamp(32px, 4vw, 52px);
+	line-height: 1.08;
+}
+#content.reg-rent-search #search {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(150px, 1fr));
+	gap: 14px;
+	margin: 0 0 26px;
+	padding: 18px;
+	border: 1px solid #dfe6ec;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 14px 36px rgba(20, 36, 50, 0.11);
+}
+#content.reg-rent-search #search h2 {
+	grid-column: 1 / -1;
+	margin: -18px -18px 2px;
+	padding: 18px;
+	background: #0a6d8f;
+	color: #fff;
+	font-size: 22px;
+	font-weight: 900;
+	text-align: left;
+}
+#content.reg-rent-search .search {
+	float: none;
+	padding: 0;
+	color: #667484;
+	font-size: 12px;
+	font-weight: 800;
+}
+#content.reg-rent-search select,
+#content.reg-rent-search input[type="text"] {
+	width: 100%;
+	min-height: 44px;
+	margin-top: 7px;
+	padding: 0 10px;
+	border: 1px solid #cfd9e2;
+	border-radius: 8px;
+	background: #fff;
+	color: #16202a;
+	font-size: 15px;
+}
+#content.reg-rent-search #setubi,
+#content.reg-rent-search #submit {
+	grid-column: 1 / -1;
+	border-top: 1px solid #dfe6ec;
+}
+#content.reg-rent-search #setubi {
+	padding-top: 14px;
+	text-align: left;
+}
+#content.reg-rent-search #setubi_menu {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 0 12px;
+	color: #064d66;
+	font-weight: 900;
+}
+#content.reg-rent-search #setubi_koumoku {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(150px, 1fr));
+	gap: 8px;
+}
+#content.reg-rent-search #setubi_koumoku label {
+	float: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 36px;
+	padding: 0 10px;
+	border: 1px solid #d8e3e8;
+	border-radius: 8px;
+	background: #fbfdfe;
+	color: #304852;
+	font-size: 13px;
+	font-weight: 700;
+}
+#content.reg-rent-search #submit {
+	padding: 14px 0 0;
+	text-align: right;
+}
+#content.reg-rent-search .submit input {
+	min-height: 44px;
+	padding: 0 24px;
+	border: 0;
+	border-radius: 8px;
+	background: #d45d33;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 900;
+}
+.reg-results-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 14px;
+	padding: 18px;
+	border: 1px solid #dfe6ec;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 8px 22px rgba(20, 36, 50, 0.06);
+}
+.reg-results-bar p {
+	margin: 0;
+	color: #667484;
+	font-size: 13px;
+	font-weight: 800;
+}
+#content.reg-rent-search .page {
+	height: auto;
+	margin: 0 0 18px;
+	text-align: right;
+}
+#content.reg-rent-search .post {
+	padding: 0;
+	border: 0;
+	margin: 0;
+	text-align: left;
+	overflow: visible;
+}
+.reg-rent-card {
+	display: grid;
+	grid-template-columns: 280px minmax(0, 1fr);
+	gap: 20px;
+	margin-bottom: 16px;
+	padding: 18px;
+	border: 1px solid #dfe6ec;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 8px 22px rgba(20, 36, 50, 0.06);
+}
+.reg-rent-card-media {
+	position: relative;
+	display: block;
+	min-height: 220px;
+	overflow: hidden;
+	border-radius: 8px;
+	background: #dfe8ec;
+}
+.reg-rent-card-photo {
+	width: 100%;
+	height: 100%;
+	min-height: 220px;
+	object-fit: cover;
+	display: block;
+}
+.reg-rent-card-media span {
+	position: absolute;
+	left: 12px;
+	top: 12px;
+	padding: 7px 10px;
+	border-radius: 6px;
+	background: rgba(255,255,255,.94);
+	color: #064d66;
+	font-size: 12px;
+	font-weight: 900;
+}
+.reg-rent-card-head {
+	display: flex;
+	justify-content: space-between;
+	gap: 14px;
+	margin-bottom: 10px;
+}
+.reg-card-kicker {
+	margin: 0 0 5px;
+	color: #667484;
+	font-size: 12px;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+.reg-rent-card h3 {
+	margin: 0;
+	font-size: 24px;
+	line-height: 1.2;
+}
+.reg-save-button {
+	display: grid;
+	place-items: center;
+	width: 42px;
+	height: 42px;
+	border: 1px solid #dfe6ec;
+	border-radius: 8px;
+	color: #d45d33 !important;
+	background: #fff;
+	font-size: 22px;
+	text-decoration: none;
+}
+.reg-rent-address {
+	margin: 0 0 10px;
+	color: #667484;
+	line-height: 1.5;
+}
+.reg-station-lines,
+.reg-rent-facts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+.reg-station-lines span,
+.reg-rent-facts span {
+	min-height: 32px;
+	padding: 8px 11px;
+	border-radius: 999px;
+	background: #edf6f6;
+	color: #225a61;
+	font-size: 13px;
+	font-weight: 800;
+}
+.reg-room-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	padding-top: 14px;
+	border-top: 1px solid #dfe6ec;
+}
+.reg-room-row strong {
+	display: block;
+	color: #d45d33;
+	font-size: 28px;
+	line-height: 1.1;
+}
+.reg-room-row p {
+	margin: 6px 0 0;
+	color: #667484;
+	font-size: 13px;
+	line-height: 1.5;
+}
+.reg-detail-button {
+	min-height: 40px;
+	padding: 11px 18px;
+	border-radius: 8px;
+	background: #0a6d8f;
+	color: #fff !important;
+	font-weight: 900;
+	text-decoration: none;
+}
+@media (max-width: 900px) {
+	#content.reg-rent-search #search,
+	#content.reg-rent-search #setubi_koumoku {
+		grid-template-columns: repeat(2, minmax(150px, 1fr));
+	}
+	.reg-rent-card {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 620px) {
+	#content.reg-rent-search #search,
+	#content.reg-rent-search #setubi_koumoku {
+		grid-template-columns: 1fr;
+	}
+	.reg-results-bar,
+	.reg-room-row {
+		align-items: stretch;
+		flex-direction: column;
+	}
+}
+</style>
+
+<div id="content" class="reg-rent-search">
+<div class="reg-page-title">
+	<p>Rental property search</p>
+	<h1>Find your next apartment in Japan</h1>
+</div>
 <ul id="search">
-	<li><h2>Search</h2></li>
+	<li><h2>Search conditions</h2></li>
 <?php
 $syubetuArr2 = array();
 foreach($syubetuArr as $key => $val){
@@ -246,33 +532,26 @@ echo $setubi;
 </div>
 </li>
 </ul>
+<div class="reg-results-bar">
+	<div>
+		<p>Search results</p>
+		<strong><?php echo $this->Paginator->counter('Search result: {:count} rooms'); ?></strong>
+	</div>
+	<span><?php echo PAGE_NUMK; ?> per page</span>
+</div>
 <p class="page">
-	<span id="line">　<?php echo PAGE_NUMK.' per page／'.
-		$this->Paginator->counter('Total{:pages} pages　Search result: {:count}'); ?>
+	<span id="line"><?php echo PAGE_NUMK.' per page / '.
+		$this->Paginator->counter('Total {:pages} pages / Search result: {:count}'); ?>
 	</span>
 <span class="mobile"><br /><br /></span>
 <?php
 if ($this->Paginator->hasPrev()) {	echo $this->Paginator->prev('back');
-}else{echo '　　';}
-echo '　　'.$this->Paginator->numbers().'　　';
+}else{echo '&nbsp;&nbsp;';}
+echo '&nbsp;&nbsp;'.$this->Paginator->numbers().'&nbsp;&nbsp;';
 if ($this->Paginator->hasNext()) {echo $this->Paginator->next('next');
-}else{echo '　　';}
+}else{echo '&nbsp;&nbsp;';}
 ?>
 </p>
-<div class="post">
-<table class="item" align="center"><tr><td width="100" align="center" class="bkco">Photos</td></tr></table>
-<table class="item" align="center"><tr><td width="140" align="center" class="bkco">
-<?php echo $this->Paginator->sort('yatin_k','Rent'); ?><br />
-Managing fee<br />Deposit<br />Key money</td></tr></table>
-<table class="item" align="center"><tr><td width="72" align="center" class="bkco">
-<?php echo $this->Paginator->sort('madori1','Layout'); ?><br />
-<?php echo $this->Paginator->sort('heibei','㎡'); ?><br />
-Total floors</td></tr></table>
-<table class="item" align="center"><tr><td width="177" align="center" class="bkco">Address<br />Minutes walk to the station</td></tr></table>
-<table class="item" align="center"><tr><td width="92" align="center" class="bkco">Property No<br />Type<br />
-<?php echo $this->Paginator->sort('tiku_nen','Built year'); ?></td></tr></table>
-<table class="item" align="center"><tr><td width="56" align="center" class="bkco">Details</td></tr></table>
-</div>
 <?php echo $table; ?>
 <p class="page">
 	<?php echo $this->Paginator->first('back',array()).'&nbsp;'.

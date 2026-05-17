@@ -51,6 +51,16 @@ function getAddressEntryByCitywardNum($citywardNum, $addressArr) {
     return array();
 }
 
+function getCitywardNameByPrefAndIndex($prefCode, $cityIndex, $addressArr) {
+    $cityList = array();
+    foreach ($addressArr as $entry) {
+        if ((string)$entry['pref'] === (string)$prefCode && !in_array($entry['cityward_en'], $cityList)) {
+            $cityList[] = $entry['cityward_en'];
+        }
+    }
+    return isset($cityList[(int)$cityIndex - 1]) ? $cityList[(int)$cityIndex - 1] : '';
+}
+
 
 App::import('Vendor', 'configRentEki');
 
@@ -103,6 +113,16 @@ if (!empty($data)) {
 $requestedZipcode = $this->request->query('zipcode');
 $requestedShicd = $this->request->query('shicd');
 $requestedTi = $this->request->query('ti');
+$requestedCity = $this->request->query('city');
+$prefCodeMap = array(
+    1 => 11,
+    2 => 12,
+    3 => 13,
+    4 => 14,
+    5 => 27,
+    6 => 26,
+    7 => 23
+);
 if (!empty($requestedZipcode)) {
     $breadcrumbEntry = getAddressEntryByZipcode($requestedZipcode, $addressArr);
     if (!empty($breadcrumbEntry)) {
@@ -115,6 +135,9 @@ if (!empty($requestedZipcode)) {
         $breadcrumbPref = $breadcrumbEntry['prefecture_en'];
         $breadcrumbCity = $breadcrumbEntry['cityward_en'];
     }
+} elseif (!empty($requestedTi) && !empty($requestedCity) && isset($prefCodeMap[(int)$requestedTi])) {
+    $breadcrumbPref = $tiikiArr[$requestedTi];
+    $breadcrumbCity = getCitywardNameByPrefAndIndex($prefCodeMap[(int)$requestedTi], $requestedCity, $addressArr);
 } elseif (!empty($requestedTi) && !empty($tiikiArr[$requestedTi])) {
     $breadcrumbPref = $tiikiArr[$requestedTi];
     $breadcrumbCity = '';
@@ -683,7 +706,7 @@ echo $setubi;
 			<a href="<?php echo h($breadcrumbPrefUrl); ?>"><?php echo h($breadcrumbPref); ?> rentals</a>
 			<?php if (!empty($breadcrumbCity)) { ?>
 			<b>›</b>
-			<strong><?php echo h($breadcrumbCity); ?></strong>
+			<strong id="breadcrumb-city"><?php echo h($breadcrumbCity); ?></strong>
 			<?php } ?>
 		</nav>
 		<label class="reg-sort-control">
@@ -747,6 +770,18 @@ var ekis = new Array();
 		params.set('sort_order', value);
 		params.delete('page');
 		window.location.search = params.toString();
+	}
+
+	function updateBreadcrumbCity() {
+		var citySelect = document.getElementById('city');
+		var cityCrumb = document.getElementById('breadcrumb-city');
+		if (!citySelect || !cityCrumb || citySelect.selectedIndex <= 0) {
+			return;
+		}
+		var selectedCity = citySelect.options[citySelect.selectedIndex].textContent;
+		if (selectedCity) {
+			cityCrumb.textContent = selectedCity;
+		}
 	}
 
 
@@ -844,10 +879,11 @@ for (let i = 0; i < keys.length; i++) {
 
     // 復元（City）
 const prevCity = <?php echo json_encode($this->request->query('city') ?? ''); ?>;
-if (prevCity !== '') {
-    document.getElementById('city').value = prevCity;
-    street();
-}
+	if (prevCity !== '') {
+	    document.getElementById('city').value = prevCity;
+	    street();
+	    updateBreadcrumbCity();
+	}
 
 // 復元（Train Line）
 const prevLine = <?php echo json_encode($this->request->query('en') ?? ''); ?>;
@@ -985,8 +1021,9 @@ Promise.all([
     document.getElementById('ti').value = prevPref;
   }
 
-  cityandline(); // ← ここで呼ぶ！
-  station();     // ← ここで呼ぶ！
+	  cityandline(); // ← ここで呼ぶ！
+	  station();     // ← ここで呼ぶ！
+	  updateBreadcrumbCity();
 
 })
 .catch(err => {
@@ -1037,11 +1074,12 @@ function updateZipcode() {
 function updateShicd() {
     const selectedCity = document.getElementById('city').options[document.getElementById('city').selectedIndex].textContent;
 	//Console.log(selectedCity);
-    const selectedShicd = address.find(entry => entry.cityward_en === selectedCity);
-    if (selectedShicd) {
-        document.getElementById('shicd').value = selectedShicd.citywardnum.toString();
-    }
-}
+	    const selectedShicd = address.find(entry => entry.cityward_en === selectedCity);
+	    if (selectedShicd) {
+	        document.getElementById('shicd').value = selectedShicd.citywardnum.toString();
+	    }
+	    updateBreadcrumbCity();
+	}
 
 function clearShicdIfNeeded() {
   const shicd = document.getElementById('shicd');

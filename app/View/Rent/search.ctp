@@ -277,10 +277,36 @@ function($da, $modelName, $ensenArr) {
 }
 ?>
 
-<style>
-/* Real Estate Guide rental search refresh */
-#content.reg-rent-search {
-	width: min(1180px, calc(100% - 32px)) !important;
+	<style>
+	/* Real Estate Guide rental search refresh */
+	#aon-final-perfect-v13 .aon-hero-v13 {
+		height: 360px !important;
+		min-height: 360px !important;
+		background-position: center 38% !important;
+	}
+	#aon-final-perfect-v13 .aon-header-inner {
+		padding: 18px 0 !important;
+	}
+	#aon-final-perfect-v13 .aon-logo-box img {
+		height: 36px !important;
+	}
+	#aon-final-perfect-v13 .aon-site-title {
+		font-size: 28px !important;
+	}
+	#aon-final-perfect-v13 .aon-main-h1 {
+		font-size: clamp(2.4rem, 5vw, 4.2rem) !important;
+		margin-bottom: 22px !important;
+	}
+	#aon-final-perfect-v13 .aon-hero-content {
+		padding-bottom: 28px !important;
+	}
+	#aon-final-perfect-v13 .aon-btn-main {
+		min-width: 180px !important;
+		padding: 13px 24px !important;
+		font-size: 14px !important;
+	}
+	#content.reg-rent-search {
+		width: min(1180px, calc(100% - 32px)) !important;
 	margin: 0 auto !important;
 	padding: 42px 0 64px !important;
 	background: #eef3f5 !important;

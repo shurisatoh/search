@@ -475,29 +475,31 @@ function($da, $modelName, $ensenArr) {
 	text-align: left;
 	overflow: visible;
 }
-.reg-rent-card {
-	display: grid;
-	grid-template-columns: 280px minmax(0, 1fr);
-	gap: 20px;
-	margin-bottom: 16px;
-	padding: 18px;
+	.reg-rent-card {
+		display: grid;
+		grid-template-columns: 220px minmax(0, 1fr);
+		gap: 14px;
+		margin-bottom: 10px;
+		padding: 12px;
 	border: 1px solid #dfe6ec;
 	border-radius: 8px;
 	background: #fff;
 	box-shadow: 0 8px 22px rgba(20, 36, 50, 0.06);
 }
-.reg-rent-card-media {
-	position: relative;
-	display: block;
-	min-height: 220px;
+	.reg-rent-card-media {
+		position: relative;
+		display: block;
+		align-self: start;
+		height: 165px;
+		min-height: 165px;
 	overflow: hidden;
 	border-radius: 8px;
 	background: #dfe8ec;
 }
-.reg-rent-card-photo {
-	width: 100%;
-	height: 100%;
-	min-height: 220px;
+	.reg-rent-card-photo {
+		width: 100%;
+		height: 100%;
+		min-height: 165px;
 	object-fit: cover;
 	display: block;
 }
@@ -505,45 +507,45 @@ function($da, $modelName, $ensenArr) {
 	position: absolute;
 	left: 12px;
 	top: 12px;
-	padding: 7px 10px;
+		padding: 5px 8px;
 	border-radius: 6px;
 	background: rgba(255,255,255,.94);
 	color: #064d66;
-	font-size: 12px;
+		font-size: 11px;
 	font-weight: 900;
 }
 .reg-rent-card-head {
 	display: flex;
 	justify-content: space-between;
-	gap: 14px;
-	margin-bottom: 10px;
+		gap: 10px;
+		margin-bottom: 6px;
 }
 .reg-card-kicker {
-	margin: 0 0 5px;
+		margin: 0 0 3px;
 	color: #667484;
-	font-size: 12px;
+		font-size: 11px;
 	font-weight: 800;
 	text-transform: uppercase;
 }
 .reg-rent-card h3 {
 	margin: 0;
-	font-size: 24px;
+		font-size: 20px;
 	line-height: 1.2;
 }
 .reg-save-button {
 	display: grid;
 	place-items: center;
-	width: 42px;
-	height: 42px;
+		width: 34px;
+		height: 34px;
 	border: 1px solid #dfe6ec;
 	border-radius: 8px;
 	color: #d45d33 !important;
 	background: #fff;
-	font-size: 22px;
+		font-size: 19px;
 	text-decoration: none;
 }
 .reg-rent-address {
-	margin: 0 0 10px;
+		margin: 0 0 7px;
 	color: #667484;
 	line-height: 1.5;
 }
@@ -551,17 +553,17 @@ function($da, $modelName, $ensenArr) {
 .reg-rent-facts {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
-	margin-bottom: 12px;
+		gap: 6px;
+		margin-bottom: 8px;
 }
 .reg-station-lines span,
 .reg-rent-facts span {
-	min-height: 32px;
-	padding: 8px 11px;
+		min-height: 26px;
+		padding: 5px 9px;
 	border-radius: 999px;
 	background: #edf6f6;
 	color: #225a61;
-	font-size: 13px;
+		font-size: 12px;
 	font-weight: 800;
 }
 .reg-room-row {
@@ -569,24 +571,24 @@ function($da, $modelName, $ensenArr) {
 	align-items: center;
 	justify-content: space-between;
 	gap: 14px;
-	padding-top: 14px;
+		padding-top: 9px;
 	border-top: 1px solid #dfe6ec;
 }
 .reg-room-row strong {
 	display: block;
 	color: #d45d33;
-	font-size: 28px;
+		font-size: 23px;
 	line-height: 1.1;
 }
 .reg-room-row p {
-	margin: 6px 0 0;
+		margin: 3px 0 0;
 	color: #667484;
 	font-size: 13px;
 	line-height: 1.5;
 }
 .reg-detail-button {
-	min-height: 40px;
-	padding: 11px 18px;
+		min-height: 34px;
+		padding: 8px 14px;
 	border-radius: 8px;
 	background: #0a6d8f;
 	color: #fff !important;

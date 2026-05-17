@@ -302,13 +302,13 @@ function($da, $modelName, $ensenArr) {
 		font-size: clamp(32px, 4vw, 46px);
 		line-height: 1.08;
 	}
-	#content.reg-rent-search #search {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		align-items: start;
-		gap: 16px;
-		margin: 0 0 26px;
-		padding: 0 20px 20px;
+		#content.reg-rent-search #search {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			align-items: start;
+			gap: 12px 16px;
+			margin: 0 0 26px;
+			padding: 0 20px 16px;
 		border: 1px solid #dfe6ec;
 		border-radius: 8px;
 		background: #fff;
@@ -336,15 +336,16 @@ function($da, $modelName, $ensenArr) {
 		display: block;
 		float: none;
 		padding: 0;
-		color: #667484;
-	font-size: 12px;
-	font-weight: 800;
-}
+			color: #667484;
+		font-size: 12px;
+		font-weight: 800;
+		line-height: 1.25;
+	}
 	#content.reg-rent-search select,
 	#content.reg-rent-search input[type="text"] {
-		width: 100%;
-		min-height: 44px;
-	margin-top: 7px;
+			width: 100%;
+			min-height: 38px;
+		margin-top: 5px;
 	padding: 0 10px;
 	border: 1px solid #cfd9e2;
 	border-radius: 8px;
@@ -353,26 +354,65 @@ function($da, $modelName, $ensenArr) {
 		font-size: 15px;
 		box-sizing: border-box;
 	}
-	#content.reg-rent-search .search select + select {
-		margin-top: 8px;
+		#content.reg-rent-search .search select + select {
+			margin-top: 6px;
+		}
+	#content.reg-rent-search .reg-range-field,
+	#content.reg-rent-search .reg-layout-field {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 6px;
+		margin-top: 5px;
 	}
-	#content.reg-rent-search .search input[type="checkbox"] {
-		margin: 0 8px 0 0;
+	#content.reg-rent-search .reg-range-field select,
+	#content.reg-rent-search .reg-layout-field select {
+		margin-top: 0;
+	}
+	#content.reg-rent-search .reg-range-field span {
+		grid-column: 1 / -1;
+		color: #667484;
+		font-size: 11px;
+		line-height: 1;
+	}
+		#content.reg-rent-search .search input[type="checkbox"] {
+			margin: 0 8px 0 0;
+		}
+	#content.reg-rent-search .reg-keymoney-option {
+		align-self: end;
+	}
+	#content.reg-rent-search .reg-keymoney-option label {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		width: 100%;
+		min-height: 38px;
+		margin-top: 16px;
+		padding: 0 12px;
+		border: 1px solid #d45d33;
+		border-radius: 8px;
+		background: #fff4ef;
+		color: #b94722;
+		font-weight: 900;
+		box-sizing: border-box;
+	}
+	#content.reg-rent-search .reg-keymoney-option input[type="checkbox"]:checked + span {
+		color: #8f3519;
 	}
 	#content.reg-rent-search #setubi,
 	#content.reg-rent-search #submit {
 	grid-column: 1 / -1;
 	border-top: 1px solid #dfe6ec;
 }
-#content.reg-rent-search #setubi {
-	padding-top: 14px;
-	text-align: left;
-}
+	#content.reg-rent-search #setubi {
+		padding-top: 12px;
+		text-align: left;
+	}
 #content.reg-rent-search #setubi_menu {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	padding: 0 0 12px;
+		padding: 0 0 10px;
 	color: #064d66;
 	font-weight: 900;
 }
@@ -661,7 +701,7 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
 ?>
 <?php echo $this->Form->hidden('zipcode', ['id' => 'zipcode']); ?>
 <?php echo $this->Form->hidden('shicd', ['id' => 'shicd']); ?>
-<li class="search">Area：<?php echo $this->Form->select('ti',$tiikiArr,array('empty'=>false,'id'=>'ti','onchange'=>'cityandline()'))."\n"; ?>
+<li class="search">Prefecture：<?php echo $this->Form->select('ti',$tiikiArr,array('empty'=>false,'id'=>'ti','onchange'=>'cityandline()'))."\n"; ?>
 </li>
 <li class="search">City：<?php echo $this->Form->select('city',$cityArr,array('empty'=>false,'id'=>'city','onchange'=>'street()'))."\n"; ?>
 <li class="search">District：<?php echo $this->Form->select('district',$districtArr,array('empty'=>false))."\n"; ?></li>
@@ -672,19 +712,28 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
 </li>
 <li class="search">Station：<?php echo $this->Form->select('ek',$ekiSeArr,array('id'=>'eki','empty'=>false))."\n"; ?>
 </li>
-<li class="search">Rent：<?php echo $this->Form->select('ts',$tinryouStartArr,array('empty'=>false))."\n"; ?>
- Yen ～ <?php echo $this->Form->select('te',$tinryouEndArr,array('empty'=>false))."\n"; ?>  Yen</li>
-<li class="search">Layout：<?php echo $this->Form->select('ms',$madori1Arr,array('empty'=>false))."\n".
-$this->Form->select('mt',$madori2Arr,array('empty'=>false))."\n"; ?></li>
+<li class="search">Rent：
+	<div class="reg-range-field">
+		<?php echo $this->Form->select('ts',$tinryouStartArr,array('empty'=>false))."\n"; ?>
+		<?php echo $this->Form->select('te',$tinryouEndArr,array('empty'=>false))."\n"; ?>
+		<span>Yen - Yen</span>
+	</div>
+</li>
+<li class="search">Layout：
+	<div class="reg-layout-field">
+		<?php echo $this->Form->select('ms',$madori1Arr,array('empty'=>false))."\n".
+		$this->Form->select('mt',$madori2Arr,array('empty'=>false))."\n"; ?>
+	</div>
+</li>
 <li class="search">Walk from station：<?php echo $this->Form->select('walk',$walkMinuteArr,array('empty'=>false))."\n"; ?></li>
 <li class="search">Building age：<?php echo $this->Form->select('age',$buildingAgeArr,array('empty'=>false))."\n"; ?></li>
 
-<li class="search">
+<li class="search reg-keymoney-option">
   <label>
-    <input type="checkbox" name="keymoney0" value="1"
-      <?php if (!empty($this->request->query['keymoney0'])) echo 'checked="checked"'; ?> />
-    No Key Money
-  </label>
+	    <input type="checkbox" name="keymoney0" value="1"
+	      <?php if (!empty($this->request->query['keymoney0'])) echo 'checked="checked"'; ?> />
+	    <span>No Key Money</span>
+	  </label>
 </li>
 
 <li id="setubi">

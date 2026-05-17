@@ -396,8 +396,21 @@ function($da, $modelName, $ensenArr) {
 		font-weight: 900;
 		box-sizing: border-box;
 	}
-	#content.reg-rent-search .reg-keymoney-option input[type="checkbox"]:checked + span {
-		color: #8f3519;
+		#content.reg-rent-search .reg-keymoney-option input[type="checkbox"]:checked + span {
+			color: #8f3519;
+	}
+	#content.reg-rent-search .reg-prefecture-field {
+		padding: 10px;
+		border: 1px solid #8fc5dc;
+		border-radius: 8px;
+		background: #f0f9fc;
+		color: #0a6d8f;
+	}
+	#content.reg-rent-search .reg-prefecture-field select {
+		border-color: #0a6d8f;
+		background: #fff;
+		box-shadow: 0 0 0 3px rgba(10, 109, 143, 0.12);
+		font-weight: 900;
 	}
 	#content.reg-rent-search #setubi,
 	#content.reg-rent-search #submit {
@@ -701,7 +714,7 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
 ?>
 <?php echo $this->Form->hidden('zipcode', ['id' => 'zipcode']); ?>
 <?php echo $this->Form->hidden('shicd', ['id' => 'shicd']); ?>
-<li class="search">Prefecture：<?php echo $this->Form->select('ti',$tiikiArr,array('empty'=>false,'id'=>'ti','onchange'=>'cityandline()'))."\n"; ?>
+<li class="search reg-prefecture-field">Prefecture：<?php echo $this->Form->select('ti',$tiikiArr,array('empty'=>false,'id'=>'ti','onchange'=>'cityandline()'))."\n"; ?>
 </li>
 <li class="search">City：<?php echo $this->Form->select('city',$cityArr,array('empty'=>false,'id'=>'city','onchange'=>'street()'))."\n"; ?>
 <li class="search">District：<?php echo $this->Form->select('district',$districtArr,array('empty'=>false))."\n"; ?></li>

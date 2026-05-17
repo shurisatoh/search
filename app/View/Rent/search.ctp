@@ -33,6 +33,24 @@ function getEnglishAddress($zipcode, $addressArr) {
     return '';
 }
 
+function getAddressEntryByZipcode($zipcode, $addressArr) {
+    foreach ($addressArr as $entry) {
+        if ((string)$entry['zip'] === (string)$zipcode) {
+            return $entry;
+        }
+    }
+    return array();
+}
+
+function getAddressEntryByCitywardNum($citywardNum, $addressArr) {
+    foreach ($addressArr as $entry) {
+        if ((string)$entry['citywardnum'] === (string)$citywardNum) {
+            return $entry;
+        }
+    }
+    return array();
+}
+
 
 App::import('Vendor', 'configRentEki');
 
@@ -70,11 +88,42 @@ foreach ($ekiArr as $key => $val) {
 
 $table = '';
 $address_en = '';
+$breadcrumbPref = 'Tokyo';
+$breadcrumbCity = '';
 if (!empty($data)) {
     $first = $data[0];
     $zipcode = $first[$modelName]['zipcode'];
     $address_en = getEnglishAddress($zipcode, $addressArr);
-	
+    $breadcrumbEntry = getAddressEntryByZipcode($zipcode, $addressArr);
+    if (!empty($breadcrumbEntry)) {
+        $breadcrumbPref = $breadcrumbEntry['prefecture_en'];
+        $breadcrumbCity = $breadcrumbEntry['cityward_en'];
+    }
+}
+$requestedZipcode = $this->request->query('zipcode');
+$requestedShicd = $this->request->query('shicd');
+$requestedTi = $this->request->query('ti');
+if (!empty($requestedZipcode)) {
+    $breadcrumbEntry = getAddressEntryByZipcode($requestedZipcode, $addressArr);
+    if (!empty($breadcrumbEntry)) {
+        $breadcrumbPref = $breadcrumbEntry['prefecture_en'];
+        $breadcrumbCity = $breadcrumbEntry['cityward_en'];
+    }
+} elseif (!empty($requestedShicd)) {
+    $breadcrumbEntry = getAddressEntryByCitywardNum($requestedShicd, $addressArr);
+    if (!empty($breadcrumbEntry)) {
+        $breadcrumbPref = $breadcrumbEntry['prefecture_en'];
+        $breadcrumbCity = $breadcrumbEntry['cityward_en'];
+    }
+} elseif (!empty($requestedTi) && !empty($tiikiArr[$requestedTi])) {
+    $breadcrumbPref = $tiikiArr[$requestedTi];
+    $breadcrumbCity = '';
+}
+$breadcrumbPrefUrl = $this->webroot.'Rent/search';
+if (!empty($requestedTi)) {
+    $breadcrumbPrefUrl .= '?ti='.urlencode($requestedTi);
+} elseif ($breadcrumbPref === 'Tokyo') {
+    $breadcrumbPrefUrl .= '?ti=3';
 }
 
 foreach( $data as $da ){
@@ -631,9 +680,11 @@ echo $setubi;
 		<nav class="reg-breadcrumb" aria-label="Breadcrumb">
 			<a href="<?php echo $this->webroot; ?>Rent/search">Search rentals by prefecture</a>
 			<b>›</b>
-			<a href="<?php echo $this->webroot; ?>Rent/search?ti=3">Tokyo rentals</a>
+			<a href="<?php echo h($breadcrumbPrefUrl); ?>"><?php echo h($breadcrumbPref); ?> rentals</a>
+			<?php if (!empty($breadcrumbCity)) { ?>
 			<b>›</b>
-			<strong>Koto-ku</strong>
+			<strong><?php echo h($breadcrumbCity); ?></strong>
+			<?php } ?>
 		</nav>
 		<label class="reg-sort-control">
 			Sort

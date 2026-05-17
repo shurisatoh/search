@@ -629,22 +629,22 @@ echo $setubi;
 	</ul>
 	<div class="reg-search-toolbar">
 		<nav class="reg-breadcrumb" aria-label="Breadcrumb">
-			<a href="<?php echo $this->webroot; ?>Rent/search">賃貸物件を都道府県から検索</a>
+			<a href="<?php echo $this->webroot; ?>Rent/search">Search rentals by prefecture</a>
 			<b>›</b>
-			<a href="<?php echo $this->webroot; ?>Rent/search?ti=3">東京都の一覧</a>
+			<a href="<?php echo $this->webroot; ?>Rent/search?ti=3">Tokyo rentals</a>
 			<b>›</b>
-			<strong>江東区</strong>
+			<strong>Koto-ku</strong>
 		</nav>
 		<label class="reg-sort-control">
 			Sort
 			<select id="sort_order" name="sort_order" onchange="changeSortOrder(this.value)">
-				<option value="rent_asc"<?php if(!empty($sortOrder) && $sortOrder == 'rent_asc'){ echo ' selected="selected"'; } ?>>家賃が安い順</option>
-				<option value="rent_desc"<?php if(!empty($sortOrder) && $sortOrder == 'rent_desc'){ echo ' selected="selected"'; } ?>>家賃が高い順</option>
-				<option value="area_desc"<?php if(!empty($sortOrder) && $sortOrder == 'area_desc'){ echo ' selected="selected"'; } ?>>面積が広い順</option>
-				<option value="area_asc"<?php if(!empty($sortOrder) && $sortOrder == 'area_asc'){ echo ' selected="selected"'; } ?>>面積が狭い順</option>
-				<option value="station_asc"<?php if(!empty($sortOrder) && $sortOrder == 'station_asc'){ echo ' selected="selected"'; } ?>>駅まで近い順</option>
-				<option value="address_asc"<?php if(!empty($sortOrder) && $sortOrder == 'address_asc'){ echo ' selected="selected"'; } ?>>住所順</option>
-				<option value="built_desc"<?php if(!empty($sortOrder) && $sortOrder == 'built_desc'){ echo ' selected="selected"'; } ?>>築年数が新しい順</option>
+				<option value="rent_asc"<?php if(!empty($sortOrder) && $sortOrder == 'rent_asc'){ echo ' selected="selected"'; } ?>>Rent: low to high</option>
+				<option value="rent_desc"<?php if(!empty($sortOrder) && $sortOrder == 'rent_desc'){ echo ' selected="selected"'; } ?>>Rent: high to low</option>
+				<option value="area_desc"<?php if(!empty($sortOrder) && $sortOrder == 'area_desc'){ echo ' selected="selected"'; } ?>>Largest floor area</option>
+				<option value="area_asc"<?php if(!empty($sortOrder) && $sortOrder == 'area_asc'){ echo ' selected="selected"'; } ?>>Smallest floor area</option>
+				<option value="station_asc"<?php if(!empty($sortOrder) && $sortOrder == 'station_asc'){ echo ' selected="selected"'; } ?>>Closest to station</option>
+				<option value="address_asc"<?php if(!empty($sortOrder) && $sortOrder == 'address_asc'){ echo ' selected="selected"'; } ?>>Address</option>
+				<option value="built_desc"<?php if(!empty($sortOrder) && $sortOrder == 'built_desc'){ echo ' selected="selected"'; } ?>>Newest building</option>
 			</select>
 		</label>
 	</div>

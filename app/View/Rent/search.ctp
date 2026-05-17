@@ -761,9 +761,10 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
 <?php
 $setubi = '<label class="reg-feature-priority"><input name="deposit0" type="checkbox" value="1"'.(!empty($this->request->query['deposit0']) ? ' checked="checked"' : '').'>No Deposit</label>'."\n";
 $setubi .= '<label class="reg-feature-priority"><input name="s18" type="checkbox" value="1"'.(!empty($this->request->query['s18']) ? ' checked="checked"' : '').'>Furnished</label>'."\n";
+$setubi .= '<label class="reg-feature-priority"><input name="s3" type="checkbox" value="1"'.(!empty($this->request->query['s3']) ? ' checked="checked"' : '').'>Separated Bath/Toilet</label>'."\n";
 $seCheck = 1;
 foreach($setubiArr as $key => $val){
-	if($val != '' && $key != 18){
+	if($val != '' && $key != 18 && $key != 3){
 		$checked = '';
 		if(!empty($this->request->query['s'.$key])){$checked = ' checked="checked"';$seCheck = 1;}
 		$setubi .= '<label><input name="s'.$key.'" type="checkbox" value="1"'.$checked.'>'.$val.'</label>'."\n";

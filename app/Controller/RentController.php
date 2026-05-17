@@ -25,6 +25,7 @@ class RentController extends AppController {
 				$modelName.'.new',$modelName.'.touroku_date',$modelName.'.hp_hyouzi',$modelName.'.gaikan_img');
 			$this->paginate['conditions']['NOT'] =  array($modelName.'.hp_hyouzi' => 1);
 			$this->paginate['conditions'][$modelName.'.yatin_k >'] = 0;
+			$this->paginate['conditions'][$modelName.'.id !='] = 10672901083;
 
 		if (!empty($this->request->query['keymoney0']) && $this->request->query['keymoney0'] === '1') {
     		$this->paginate['conditions'][$modelName . '.kaiyaku_k'] = 0;

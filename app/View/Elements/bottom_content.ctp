@@ -53,6 +53,55 @@
     </section>
 
     <footer class="aon-black-strip">
+        <?php if (!empty($showFooterDirectoryLinks)) : ?>
+        <div class="aon-search-links">
+            <div class="aon-link-group">
+                <h3>Find Property</h3>
+                <ul>
+                    <li><a href="https://realestateguide.jp/search/House/search">Buy</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search">Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search">Low Initial Cost</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search">Short-Term Rentals</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search">Luxury Rentals</a></li>
+                    <li><a href="https://realestateguide.jp/search/House/search">Investment Properties</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search">Serviced Apartments</a></li>
+                    <li><a href="https://realestateguide.jp/contact/">Real Estate Company Search</a></li>
+                </ul>
+            </div>
+
+            <div class="aon-link-group">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="https://realestateguide.jp/blog/">Seminars</a></li>
+                    <li><a href="https://realestateguide.jp/blog/">Buying Property in Japan</a></li>
+                    <li><a href="https://realestateguide.jp/contact/">Financing</a></li>
+                    <li><a href="https://realestateguide.jp/search/House/search?ti=3">Tokyo Real Estate Investment</a></li>
+                    <li><a href="https://realestateguide.jp/contact/">Property Management</a></li>
+                    <li><a href="https://realestateguide.jp/blog/">Japan Real Estate Guide</a></li>
+                    <li><a href="https://realestateguide.jp/blog/">Topics</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search">Property Finder</a></li>
+                </ul>
+            </div>
+
+            <div class="aon-link-group">
+                <h3>Japan</h3>
+                <ul>
+                    <li><a href="https://realestateguide.jp/search/House/search?ti=3">Tokyo Property for Sale</a></li>
+                    <li><a href="https://realestateguide.jp/search/House/search?ti=1">Saitama Property for Sale</a></li>
+                    <li><a href="https://realestateguide.jp/search/House/search?ti=2">Chiba Property for Sale</a></li>
+                    <li><a href="https://realestateguide.jp/search/House/search?ti=4">Kanagawa Property for Sale</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=3">Tokyo Apartments for Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=2">Chiba Apartments for Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=1">Saitama Apartments for Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=4">Kanagawa Apartments for Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=5">Osaka Apartments for Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=7">Aichi Apartments for Rent</a></li>
+                    <li><a href="https://realestateguide.jp/search/Rent/search?ti=6">Kyoto Apartments for Rent</a></li>
+                </ul>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <div class="aon-sns-row">
             <a href="https://www.facebook.com/AonissinRealEstate/" class="sns-btn"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/aonissin_estate/" class="sns-btn ig"><i class="fa-brands fa-instagram"></i></a>
@@ -95,6 +144,40 @@
 }
 .aon-icon-circle i { color: #ffffff; font-size: 18px; }
 
+.aon-search-links {
+    width: min(1380px, calc(100% - 80px));
+    margin: 0 auto 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 90px;
+    text-align: left;
+}
+.aon-link-group h3 {
+    margin: 0 0 24px;
+    font-size: 28px;
+    line-height: 1.3;
+    color: #bdbdbd;
+    font-weight: 900;
+}
+.aon-link-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.aon-link-group li {
+    margin: 0 0 14px;
+    line-height: 1.35;
+}
+.aon-link-group a {
+    color: #a8a8a8;
+    font-size: 22px;
+    font-weight: 800;
+    text-decoration: none;
+}
+.aon-link-group a:hover {
+    color: #ffffff;
+}
+
 .aon-divider { border: 0; border-top: 1px solid #eee; margin: 50px 0; }
 
 /* ロゴとメニュー */
@@ -113,6 +196,9 @@
 
 @media (max-width: 768px) {
     .aon-main-white-card { padding: 30px; }
+    .aon-search-links { width: calc(100% - 48px); grid-template-columns: 1fr; gap: 32px; margin-bottom: 36px; }
+    .aon-link-group h3 { font-size: 24px; margin-bottom: 16px; }
+    .aon-link-group a { font-size: 18px; }
     .aon-links { flex-direction: column; gap: 20px; }
 }
 </style>

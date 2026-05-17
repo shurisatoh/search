@@ -305,6 +305,70 @@ function($da, $modelName, $ensenArr) {
 		padding: 13px 24px !important;
 		font-size: 14px !important;
 	}
+	#aon-footer-fixed-v4 .aon-bg-section {
+		padding: 42px 0 !important;
+	}
+	#aon-footer-fixed-v4 .aon-main-white-card {
+		max-width: 900px !important;
+		margin: 0 auto !important;
+		padding: 36px 44px !important;
+	}
+	#aon-footer-fixed-v4 .aon-title {
+		font-size: 34px !important;
+	}
+	#aon-footer-fixed-v4 .aon-blue-line {
+		width: 52px !important;
+		height: 4px !important;
+		margin: 16px 0 20px !important;
+	}
+	#aon-footer-fixed-v4 .aon-subtitle {
+		font-size: 15px !important;
+		margin-bottom: 24px !important;
+	}
+	#aon-footer-fixed-v4 .aon-contact-item {
+		gap: 14px !important;
+		margin-bottom: 12px !important;
+	}
+	#aon-footer-fixed-v4 .aon-icon-circle {
+		width: 36px !important;
+		height: 36px !important;
+	}
+	#aon-footer-fixed-v4 .aon-icon-circle i {
+		font-size: 14px !important;
+	}
+	#aon-footer-fixed-v4 .aon-text-link,
+	#aon-footer-fixed-v4 .aon-address {
+		font-size: 16px !important;
+	}
+	#aon-footer-fixed-v4 .aon-divider {
+		margin: 28px 0 !important;
+	}
+	#aon-footer-fixed-v4 .aon-brand {
+		margin-bottom: 18px !important;
+	}
+	#aon-footer-fixed-v4 .aon-brand img {
+		height: 34px !important;
+	}
+	#aon-footer-fixed-v4 .aon-brand span {
+		font-size: 26px !important;
+	}
+	#aon-footer-fixed-v4 .aon-links {
+		gap: 30px !important;
+	}
+	#aon-footer-fixed-v4 .aon-links a {
+		font-size: 18px !important;
+	}
+	#aon-footer-fixed-v4 .aon-black-strip {
+		padding: 28px 0 !important;
+	}
+	#aon-footer-fixed-v4 .aon-sns-row {
+		margin-bottom: 14px !important;
+	}
+	#aon-footer-fixed-v4 .sns-btn {
+		width: 36px !important;
+		height: 36px !important;
+		font-size: 15px !important;
+	}
 	#content.reg-rent-search {
 		width: min(1180px, calc(100% - 32px)) !important;
 	margin: 0 auto !important;
@@ -1256,4 +1320,4 @@ fetch('/search/trains.json')
   });
 </script>
 
-<?php echo $this->element('bottom_content'); ?>
+<?php echo $this->element('bottom_content', array('showFooterDirectoryLinks' => true)); ?>

@@ -95,14 +95,30 @@ class RentController extends AppController {
     		$this->paginate['conditions'][$modelName . '.yatin_k >='] = $yatinLower;
 		}
 
-		if (!empty($this->request->query['te']) && $this->request->query['te'] != 0) {
-    		$this->request->data['te'] = $this->request->query['te'];
-    		$yatinUpper = (int)str_replace(',', '', $tinryouEndArr[$this->request->query['te']]);
-    		$this->paginate['conditions'][$modelName . '.yatin_k <='] = $yatinUpper;
-		}
+			if (!empty($this->request->query['te']) && $this->request->query['te'] != 0) {
+				$this->request->data['te'] = $this->request->query['te'];
+				$yatinUpper = (int)str_replace(',', '', $tinryouEndArr[$this->request->query['te']]);
+				$this->paginate['conditions'][$modelName . '.yatin_k <='] = $yatinUpper;
+			}
+
+			if (!empty($this->request->query['walk']) && $this->request->query['walk'] != 0) {
+				$this->request->data['walk'] = $this->request->query['walk'];
+				$walkMinutes = (int)$this->request->query['walk'];
+				$this->paginate['conditions'][] = array('OR' => array(
+					array($modelName.'.eki_hun1 <=' => $walkMinutes),
+					array($modelName.'.eki_hun2 <=' => $walkMinutes),
+					array($modelName.'.eki_hun3 <=' => $walkMinutes)
+				));
+			}
+
+			if (!empty($this->request->query['age']) && $this->request->query['age'] != 0) {
+				$this->request->data['age'] = $this->request->query['age'];
+				$builtAfter = (int)date('Y') - (int)$this->request->query['age'];
+				$this->paginate['conditions'][$modelName.'.tiku_nen >='] = $builtAfter;
+			}
 
 
-		foreach($setubiArr as $key => $val){
+			foreach($setubiArr as $key => $val){
 			if($val != ''){
 				if(!empty($this->request->query['s'.$key])){
 					$this->paginate['conditions'][$modelName.'.setubi'.$key] =  $this->request->query['s'.$key];

@@ -19,6 +19,25 @@ $tinryouStartArr = tinryouStartArr();
 $tinryouEndArr = tinryouEndArr();
 $hosyou_kuArr = hosyou_kuArr();
 $kaiyaku_kuArr = kaiyaku_kuArr();
+$walkMinuteArr = array(
+	'' => 'Any',
+	3 => 'Within 3 min',
+	5 => 'Within 5 min',
+	7 => 'Within 7 min',
+	10 => 'Within 10 min',
+	15 => 'Within 15 min',
+	20 => 'Within 20 min'
+);
+$buildingAgeArr = array(
+	'' => 'Any',
+	1 => 'Built within 1 year',
+	3 => 'Built within 3 years',
+	5 => 'Built within 5 years',
+	10 => 'Built within 10 years',
+	15 => 'Built within 15 years',
+	20 => 'Built within 20 years',
+	30 => 'Built within 30 years'
+);
 
 // address.json 読み込みと zipcode → 英語住所変換用
 $addressJson = file_get_contents(ROOT . DS . APP_DIR . DS . 'webroot' . DS . 'address.json');
@@ -642,7 +661,7 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
 ?>
 <?php echo $this->Form->hidden('zipcode', ['id' => 'zipcode']); ?>
 <?php echo $this->Form->hidden('shicd', ['id' => 'shicd']); ?>
-<li class="search">Prefecture：<?php echo $this->Form->select('ti',$tiikiArr,array('empty'=>false,'id'=>'ti','onchange'=>'cityandline()'))."\n"; ?>
+<li class="search">Area：<?php echo $this->Form->select('ti',$tiikiArr,array('empty'=>false,'id'=>'ti','onchange'=>'cityandline()'))."\n"; ?>
 </li>
 <li class="search">City：<?php echo $this->Form->select('city',$cityArr,array('empty'=>false,'id'=>'city','onchange'=>'street()'))."\n"; ?>
 <li class="search">District：<?php echo $this->Form->select('district',$districtArr,array('empty'=>false))."\n"; ?></li>
@@ -657,6 +676,8 @@ echo $this->Form->create(false,array('type'=>'get','url'=>'search','name'=>'sear
  Yen ～ <?php echo $this->Form->select('te',$tinryouEndArr,array('empty'=>false))."\n"; ?>  Yen</li>
 <li class="search">Layout：<?php echo $this->Form->select('ms',$madori1Arr,array('empty'=>false))."\n".
 $this->Form->select('mt',$madori2Arr,array('empty'=>false))."\n"; ?></li>
+<li class="search">Walk from station：<?php echo $this->Form->select('walk',$walkMinuteArr,array('empty'=>false))."\n"; ?></li>
+<li class="search">Building age：<?php echo $this->Form->select('age',$buildingAgeArr,array('empty'=>false))."\n"; ?></li>
 
 <li class="search">
   <label>
